@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation-bar {
+  border: 1px solid black;
+  color: #fff;
+  background-color: #3c3c42;
+  width: 100%;
+  max-width: 1920px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+}
+
+.navigation-items {
+  width: 100%;
+  max-width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > * {
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.2s ease all;
+    &:hover {
+      background-color: #56565a;
+    }
+  }
+}

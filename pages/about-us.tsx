@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Layout from '../components/layout';
 
 const AboutUs: NextPage = () => {
   return (
-    <div>
+    <Layout>
       <Head>
         <title>About GameAs</title>
         <meta name='description' content='About GameAs Amoeba' />
@@ -13,7 +14,7 @@ const AboutUs: NextPage = () => {
       <main>
         <h1>About Us</h1>
       </main>
-    </div>
+    </Layout>
   );
 };
 
