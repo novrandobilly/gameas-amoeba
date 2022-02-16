@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  max-width: 1920px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30vh;
+}
+
+.game-link {
+  a {
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    background-color: #e63673;
+    color: #fff;
+    border-radius: 0.2em;
+  }
+}
