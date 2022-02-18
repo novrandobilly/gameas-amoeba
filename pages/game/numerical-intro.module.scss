@@ -1,0 +1,271 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+.enterance {
+  background-image: url('../../assets/Enterance.png');
+}
+.control {
+  background-image: url('../../assets/Control.png');
+}
+.mission {
+  background-image: url('../../assets/Mission.png');
+}
+
+.missionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 32px;
+}
+
+.buttonWraper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.button {
+  width: 70px;
+  height: 70px;
+  font-size: 4rem;
+  color: white;
+  background-color: #347aeb;
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+  &:disabled {
+    background-color: #777777;
+    opacity: 0.7;
+  }
+}
+
+// Proctor
+
+.proctorContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 100%;
+  background-color: #367beb77;
+  align-items: center;
+  justify-content: center;
+}
+
+.proctor {
+  background-image: url('../../assets/Proctoring.png');
+  width: 90%;
+  height: 90%;
+  background-size: cover;
+}
+
+.proctorText {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.submit {
+  width: 200px;
+  height: 50px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  background-color: #5ea644;
+  color: white;
+  box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.startButton {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  position: absolute;
+  bottom: 17%;
+  width: 300px;
+  height: 80px;
+  cursor: pointer;
+}
+
+// Story display
+.storyContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 20%;
+  background-color: #367bebc5;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 40px;
+  padding: 24px;
+  z-index: 20;
+}
+
+.storyText {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+// Guide screen
+.guideContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 87%;
+  padding: 24px;
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+}
+
+.guideScreen {
+  width: 41vw;
+  height: 65vh;
+  background-color: #777777b0;
+}
+
+// Steering wheel
+.steerContainer {
+  position: absolute;
+  bottom: 0px;
+  z-index: 0;
+}
+
+.shapeWraper {
+  position: relative;
+}
+
+.oval {
+  width: 300px;
+  height: 70px;
+  background: #00a7fa;
+  border-radius: 100%;
+  position: absolute;
+  left: 35%;
+  top: 10px;
+  z-index: 10;
+}
+
+.ovalShadow {
+  width: 300px;
+  height: 70px;
+  background: #ffffff;
+  border-radius: 100%;
+  border: 1px solid black;
+  position: absolute;
+  left: 35%;
+  top: 20px;
+  z-index: 5;
+}
+
+.selectorWrapper {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 10;
+  bottom: 20%;
+  left: 15%;
+  width: 70%;
+}
+
+.triangleLeft {
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-right: 100px solid #00a7fa;
+  border-bottom: 50px solid transparent;
+}
+
+.triangleRight {
+  width: 0px;
+  height: 0px;
+  border-top: 50px solid transparent;
+  border-left: 100px solid #00a7fa;
+  border-bottom: 50px solid transparent;
+}
+
+.shadowWrapper {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 5;
+  bottom: 20%;
+  left: 16%;
+  width: 68%;
+}
+
+.triangleLeftShadow {
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-right: 100px solid #acacac;
+  border-bottom: 50px solid transparent;
+}
+
+.triangleRightShadow {
+  width: 0px;
+  height: 0px;
+  border-top: 50px solid transparent;
+  border-left: 100px solid #acacac;
+  border-bottom: 50px solid transparent;
+}
+
+// Explaination display
+.explainContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 20%;
+  background-color: #367bebc5;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 40%;
+  padding: 24px;
+  z-index: 20;
+}
+
+.explainText {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.lineHelperLeft {
+  width: 3px;
+  height: 200px;
+  background: red;
+  position: absolute;
+  z-index: 20;
+  bottom: 15%;
+  left: 30%;
+}
+
+.lineHelperRight {
+  width: 3px;
+  height: 200px;
+  background: red;
+  position: absolute;
+  z-index: 20;
+  bottom: 15%;
+  right: 30%;
+}
+
+.lineHelperMid {
+  width: 3px;
+  height: 130px;
+  background: red;
+  position: absolute;
+  z-index: 20;
+  bottom: 25%;
+  left: 50%;
+}

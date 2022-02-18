@@ -29,7 +29,7 @@ const Game: NextPage = () => {
           </div>
         </form>
         <button className={styles['numerical-button']}>
-          <Link href='/game/numerical'>Game I: Numerical Ability</Link>
+          <Link href='/game/numerical-intro'>Game I: Numerical Ability</Link>
         </button>
         <button className={styles['problem-solving-button']}>
           <Link href='/game/problem-solving'>Game II: Problem Solving</Link>
