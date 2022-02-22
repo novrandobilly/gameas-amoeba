@@ -20,7 +20,9 @@ const Game: NextPage = () => {
             <Image src={Logo} width={300} height={150} />
           </div>
         </Link>
-        <button className={styles['register-button']}>Daftar</button>
+        <Link href='/game/registration'>
+          <button className={styles['register-button']}>Daftar</button>
+        </Link>
         <form className={styles['login-form']}>
           <h3>Sudah terdaftar?</h3>
           <div className={styles['login-input']}>
@@ -28,18 +30,18 @@ const Game: NextPage = () => {
             <button className={styles['login-button']}>Scan ID</button>
           </div>
         </form>
-        <button className={styles['numerical-button']}>
-          <Link href='/game/numerical'>Game I: Numerical Ability</Link>
-        </button>
-        <button className={styles['problem-solving-button']}>
-          <Link href='/game/problem-solving'>Game II: Problem Solving</Link>
-        </button>
-        <button className={styles['result-button']}>
-          <Link href='/result/id-sembarang'>Hasil Test</Link>
-        </button>
-        <button className={styles['help-button']}>
-          <Link href='/help'>Bantuan</Link>
-        </button>
+        <Link href='/game/numerical-intro'>
+          <button className={styles['numerical-button']}>Game I: Numerical Ability</button>
+        </Link>
+        <Link href='/game/problem-solving'>
+          <button className={styles['problem-solving-button']}>Game II: Problem Solving</button>
+        </Link>
+        <Link href='/result/id-sembarang'>
+          <button className={styles['result-button']}>Hasil Test</button>
+        </Link>
+        <Link href='/help'>
+          <button className={styles['help-button']}>Bantuan</button>
+        </Link>
       </div>
     </div>
   );
