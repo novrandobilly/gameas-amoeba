@@ -2,9 +2,9 @@ import type { NextPage } from 'next';
 import { useState, ChangeEvent } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Male from '../../assets/male.svg';
 import Female from '../../assets/female.svg';
-import ProfileScanning from '../../assets/profile-scanning.png';
 
 import styles from './registration.module.scss';
 
@@ -31,8 +31,9 @@ type payloadType = {
 };
 
 const Registration: NextPage = () => {
+  const router = useRouter();
   const [identity, setIdentity] = useState<identityType>({ name: '', email: '' });
-  const [phase, setPhase] = useState<number>(4);
+  const [phase, setPhase] = useState<number>(1);
   const [isMale, setIsMale] = useState<boolean>(true);
   const [additional, setAdditional] = useState<additionalDataType>({
     dateOfBirth: '',
@@ -95,6 +96,26 @@ const Registration: NextPage = () => {
       jobDesc: additional.jobDesc,
       regional: additional.regional,
     };
+
+    fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((resJSON) => {
+        console.log(resJSON);
+        router.push('/game');
+      })
+      .catch((err) => {
+        if (err instanceof Error) {
+          throw new Error(err.message);
+        } else {
+          throw new Error('Something went wrong');
+        }
+      });
 
     console.log(payload);
   };
