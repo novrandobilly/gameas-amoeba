@@ -192,20 +192,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 10px;
     .image-scanning {
       $base-width: 200px;
       background-image: url('../../assets/profile-scanning.png');
       background-repeat: no-repeat;
-      background-size: contain;
+      background-size: cover;
       background-position: center;
-      width: $base-width;
-      height: 2.05 * $base-width;
+      width: 150px;
+      height: 300px;
+      min-height: 300px;
       .scan-line {
         width: 90%;
         height: 2px;
         background-color: #00ff00;
         margin: auto;
-        animation: scanner 1.5s linear infinite alternate;
+        animation: scanner 2s linear infinite alternate;
         box-shadow: 0 0 15px 5px #008b00;
       }
     }
@@ -214,7 +216,7 @@
       text-align: center;
       width: 100%;
       max-width: 500px;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
   }
 }
@@ -235,9 +237,9 @@
 
 @keyframes scanner {
   0% {
-    transform: translateY(10px);
+    transform: translateY(5px);
   }
   100% {
-    transform: translateY(400px);
+    transform: translateY(290px);
   }
 }

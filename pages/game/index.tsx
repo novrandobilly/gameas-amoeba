@@ -69,13 +69,17 @@ const Game: NextPage = () => {
           </Fragment>
         )}
         <Link href='/game/numerical-intro'>
-          <button className={styles['numerical-button']}>Game I: Numerical Ability</button>
+          <button disabled={status !== 'authenticated'} className={styles['numerical-button']}>
+            Game I: Numerical Ability
+          </button>
         </Link>
         <Link href='/game/problem-solving'>
-          <button className={styles['problem-solving-button']}>Game II: Problem Solving</button>
+          <button disabled={status !== 'authenticated'} className={styles['problem-solving-button']}>
+            Game II: Problem Solving
+          </button>
         </Link>
         {status === 'authenticated' && (
-          <Link href='/result/id-sembarang'>
+          <Link href={`/result/${session?.userId}`}>
             <button className={styles['result-button']}>Hasil Test</button>
           </Link>
         )}

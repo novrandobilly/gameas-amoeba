@@ -3,6 +3,7 @@ import { useState, ChangeEvent } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
 import Male from '../../assets/male.svg';
 import Female from '../../assets/female.svg';
 
@@ -107,7 +108,9 @@ const Registration: NextPage = () => {
       .then((res) => res.json())
       .then((resJSON) => {
         console.log(resJSON);
-        router.push('/game');
+        signIn('credentials', { redirect: false, email: identity.email }).then(() => {
+          router.push('/game');
+        });
       })
       .catch((err) => {
         if (err instanceof Error) {
