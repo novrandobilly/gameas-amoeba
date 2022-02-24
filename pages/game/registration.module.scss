@@ -1,0 +1,245 @@
+@mixin registration-container() {
+  width: 100%;
+  max-width: 90vw;
+  height: 90vh;
+  margin: auto;
+  box-sizing: border-box;
+  box-shadow: inset 0 10px 5px #2929299c;
+  border-radius: 50px;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-image: url('../../assets/registration-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 5vh 0;
+}
+
+.name-container {
+  @include registration-container();
+  background-color: #ff3d64b0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+
+  p {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+  }
+  input {
+    font-size: 2rem;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    padding: 15px;
+    width: 100%;
+    max-width: 500px;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      font-size: 2rem;
+    }
+  }
+  & > * {
+    margin: 15px 0;
+  }
+}
+
+.gender-container {
+  @include registration-container();
+  background-color: #ffffffd8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  & > h1 {
+    font-size: 3rem;
+  }
+  .gender-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .gender {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: 0.3s all ease;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+    .male {
+      color: #40abf6;
+    }
+    .female {
+      color: #e9467b;
+    }
+  }
+}
+
+.additional-data-container {
+  @include registration-container();
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffffd8;
+  .additional-data-input {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+    margin: 10px;
+
+    input {
+      font-size: 2rem;
+      outline: none;
+      border: none;
+    }
+  }
+  .reg-button {
+    margin-top: 40px;
+    border: 2px solid #ff3d64;
+  }
+}
+
+.summary {
+  @include registration-container();
+  box-shadow: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+
+  .biodata-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    background-color: #e9467b;
+    box-shadow: inset 0 10px 5px #2929299c;
+    border-radius: 50px;
+    box-sizing: border-box;
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+    h1 {
+      font-size: 3rem;
+    }
+    h2 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+    .user-biodata {
+      color: yellow;
+    }
+    .main-biodata {
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    button {
+      border: none;
+      font-size: 1.5rem;
+      padding: 5px 15px;
+      margin-bottom: 20px;
+      border-radius: 40px;
+      color: #fff;
+      &:hover {
+        cursor: pointer;
+      }
+      &.submit-button {
+        background-color: #5ea644;
+      }
+      &.edit-button {
+        background-color: #737982;
+      }
+    }
+  }
+  .information-summary {
+    box-sizing: border-box;
+    width: 40%;
+    height: 75%;
+    background-color: #ffffffd8;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    .image-scanning {
+      $base-width: 200px;
+      background-image: url('../../assets/profile-scanning.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      width: 150px;
+      height: 300px;
+      min-height: 300px;
+      .scan-line {
+        width: 90%;
+        height: 2px;
+        background-color: #00ff00;
+        margin: auto;
+        animation: scanner 2s linear infinite alternate;
+        box-shadow: 0 0 15px 5px #008b00;
+      }
+    }
+    p {
+      color: #000;
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.reg-button {
+  border: none;
+  font-size: 2rem;
+  width: 100%;
+  max-width: 100px;
+  border-radius: 10px;
+  color: #ff3d64;
+  transition: all 0.5s cubic-bezier(0.26, 0.62, 0.54, 2);
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes scanner {
+  0% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(290px);
+  }
+}

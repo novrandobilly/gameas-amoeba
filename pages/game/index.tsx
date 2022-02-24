@@ -1,4 +1,7 @@
 import type { NextPage } from 'next';
+import { ChangeEvent, FormEvent, Fragment, MouseEvent, useEffect, useState } from 'react';
+import { useSession, getSession } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 import Head from 'next/head';
 import styles from './index.module.scss';
 import Image from 'next/image';
@@ -6,6 +9,28 @@ import Logo from '../../assets/logo.svg';
 import Link from 'next/link';
 
 const Game: NextPage = () => {
+  const { data: session, status } = useSession();
+  const [loginLoading, setLoginLoading] = useState<boolean>(false);
+  const [codename, setCodename] = useState<string>('');
+
+  const onCodenameHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const codenameValue = event.target.value;
+    setCodename(codenameValue);
+  };
+
+  const onLoginHandler = async (event: FormEvent) => {
+    event.preventDefault();
+    setLoginLoading(true);
+    const result = await signIn('credentials', { redirect: false, email: codename });
+    setCodename('');
+    console.log(result);
+    setLoginLoading(false);
+  };
+  const onLogoutHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    signOut({ redirect: false });
+  };
+
   return (
     <div className={styles['container']}>
       <Head>
@@ -20,26 +45,52 @@ const Game: NextPage = () => {
             <Image src={Logo} width={300} height={150} />
           </div>
         </Link>
-        <button className={styles['register-button']}>Daftar</button>
-        <form className={styles['login-form']}>
-          <h3>Sudah terdaftar?</h3>
-          <div className={styles['login-input']}>
-            <input type='text' placeholder='Silahkan input username anda' />
-            <button className={styles['login-button']}>Scan ID</button>
-          </div>
-        </form>
-        <button className={styles['numerical-button']}>
-          <Link href='/game/numerical-intro'>Game I: Numerical Ability</Link>
-        </button>
-        <button className={styles['problem-solving-button']}>
-          <Link href='/game/problem-solving'>Game II: Problem Solving</Link>
-        </button>
-        <button className={styles['result-button']}>
-          <Link href='/result/id-sembarang'>Hasil Test</Link>
-        </button>
-        <button className={styles['help-button']}>
-          <Link href='/help'>Bantuan</Link>
-        </button>
+
+        {status !== 'authenticated' && (
+          <Fragment>
+            <Link href='/game/registration'>
+              <button className={styles['register-button']}>Daftar</button>
+            </Link>
+            <form className={styles['login-form']} onSubmit={onLoginHandler}>
+              <h3>Sudah terdaftar?</h3>
+              <div className={styles['login-input']}>
+                <input
+                  type='text'
+                  placeholder='Silahkan input username anda'
+                  value={codename}
+                  onChange={onCodenameHandler}
+                />
+                <button type='submit' className={styles['login-button']}>
+                  Scan ID
+                </button>
+                {loginLoading && <span>Loading...</span>}
+              </div>
+            </form>
+          </Fragment>
+        )}
+        <Link href='/game/numerical-intro'>
+          <button disabled={status !== 'authenticated'} className={styles['numerical-button']}>
+            Game I: Numerical Ability
+          </button>
+        </Link>
+        <Link href='/game/problem-solving'>
+          <button disabled={status !== 'authenticated'} className={styles['problem-solving-button']}>
+            Game II: Problem Solving
+          </button>
+        </Link>
+        {status === 'authenticated' && (
+          <Link href={`/result/${session?.userId}`}>
+            <button className={styles['result-button']}>Hasil Test</button>
+          </Link>
+        )}
+        <Link href='/help'>
+          <button className={styles['help-button']}>Bantuan</button>
+        </Link>
+        {status === 'authenticated' && (
+          <button className={styles['help-button']} onClick={onLogoutHandler}>
+            Keluar
+          </button>
+        )}
       </div>
     </div>
   );
