@@ -104,9 +104,9 @@ const Explaination: FC<TextProps> = (props) => {
 const NumericalIntro: FC<NumericProps> = (props) => {
   const { nama } = props;
 
-  const [renderBackground, setRenderBackground] = useState('');
-  const [visible, setVisible] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [renderBackground, setRenderBackground] = useState<string>('');
+  const [visible, setVisible] = useState<boolean>(false);
+  const [counter, setCounter] = useState<number>(0);
 
   const [story] = useState([
     { id: 1, text: `hi ${nama}, selamat datang di ruang kendali!` },
@@ -136,6 +136,10 @@ const NumericalIntro: FC<NumericProps> = (props) => {
     {
       id: 10,
       text: `Tentukan jumlah sesuai dengan operasi +, -, x, : yang ditunjukkan pada indikator ini!`,
+    },
+    {
+      id: 11,
+      text: `Mohon membaca instruksi secara teliti! anda tidak dapat kembali ke panel ini setelah menekan tombol mulai!`,
     },
   ]);
 
@@ -167,8 +171,6 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   const substractCounter = () => {
     setCounter(counter - 1);
   };
-
-  console.log(counter);
 
   return (
     <div className={`${styles['container']} ${styles[`${renderBackground}`]}`}>
@@ -215,7 +217,7 @@ const NumericalIntro: FC<NumericProps> = (props) => {
             </>
           )}
 
-          {counter >= 10 && counter <= 12 && (
+          {counter >= 10 && counter <= 13 && (
             <>
               <Explaination text={story[counter - 3].text} />
               <div

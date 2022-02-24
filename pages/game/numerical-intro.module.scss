@@ -41,6 +41,7 @@
   &:disabled {
     background-color: #777777;
     opacity: 0.7;
+    cursor: no-drop;
   }
 }
 
@@ -156,13 +157,13 @@
 }
 
 .ovalShadow {
-  width: 300px;
+  width: 320px;
   height: 70px;
   background: #ffffff;
   border-radius: 100%;
   border: 1px solid black;
   position: absolute;
-  left: 35%;
+  left: 34%;
   top: 20px;
   z-index: 5;
 }
