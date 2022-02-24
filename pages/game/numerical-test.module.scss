@@ -1,0 +1,212 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('../../assets/Mission.png');
+}
+
+.missionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 32px;
+}
+
+// Steering wheel
+.steerContainer {
+  position: absolute;
+  bottom: 0px;
+  z-index: 0;
+}
+
+.shapeWraper {
+  position: relative;
+}
+
+.oval {
+  width: 300px;
+  height: 70px;
+  background: #00a7fa;
+  border-radius: 100%;
+  position: absolute;
+  left: 35%;
+  top: 10px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.operator {
+  color: white;
+  font-size: 4rem;
+  z-index: 20;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 24px;
+}
+
+.ovalShadow {
+  width: 320px;
+  height: 70px;
+  background: #ffffff;
+  border-radius: 100%;
+  border: 1px solid black;
+  position: absolute;
+  left: 34%;
+  top: 20px;
+  z-index: 5;
+}
+
+.selectorWrapper {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 10;
+  bottom: 20%;
+  left: 15%;
+  width: 70%;
+}
+
+.triangleLeft {
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-right: 100px solid #00a7fa;
+  border-bottom: 50px solid transparent;
+}
+
+.triangleRight {
+  width: 0px;
+  height: 0px;
+  border-top: 50px solid transparent;
+  border-left: 100px solid #00a7fa;
+  border-bottom: 50px solid transparent;
+}
+
+.shadowWrapper {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 5;
+  bottom: 20%;
+  left: 16%;
+  width: 68%;
+}
+
+.triangleLeftShadow {
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-right: 100px solid #acacac5d;
+  border-bottom: 50px solid transparent;
+}
+
+.triangleRightShadow {
+  width: 0px;
+  height: 0px;
+  border-top: 50px solid transparent;
+  border-left: 100px solid #acacac5d;
+  border-bottom: 50px solid transparent;
+}
+
+.triangleLeftButton {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.triangleRightButton {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+// Guide screen
+.guideContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 87%;
+  padding: 24px;
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+}
+
+.guideScreen {
+  width: 41vw;
+  height: 65vh;
+  background-color: #777777dc;
+}
+
+// Asteroid
+.asteroidContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 87%;
+  padding: 24px;
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+}
+
+.asteroidScreen {
+  position: relative;
+  width: 41vw;
+  height: 65vh;
+}
+
+.asteroidBox {
+  position: absolute;
+  background-image: url('../../assets/Asteroid.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 160px;
+  height: 140px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.normal {
+  top: 50px;
+  left: 150px;
+}
+
+.middle {
+  right: 100px;
+  top: 150px;
+}
+
+.bottom {
+  bottom: 80px;
+  left: 90px;
+}
+
+.asteroidNumber {
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+// Screen color
+.green {
+  background-color: rgba(55, 177, 55, 0.452);
+  z-index: 30;
+}
+
+.red {
+  background-color: rgba(236, 48, 48, 0.384);
+  z-index: 30;
+}
