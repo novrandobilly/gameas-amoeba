@@ -5,6 +5,14 @@ import Head from 'next/head';
 import SteerImage from '../../assets/Steering.png';
 
 import styles from './numerical-test.module.scss';
+import { render } from 'sass';
+import { count } from 'console';
+
+interface QuizProps {
+  one: number;
+  two: number;
+  three: number;
+}
 
 interface GuideProps {
   leftBgColor: string;
@@ -18,9 +26,7 @@ interface SteerProps {
 }
 
 interface AsteroidProps {
-  number: number;
-  index?: number;
-  direction?: string;
+  number: QuizProps;
 }
 
 const Guide: FC<GuideProps> = (props) => {
@@ -38,7 +44,6 @@ const Guide: FC<GuideProps> = (props) => {
 
 const Steer: FC<SteerProps> = (props) => {
   const { onAnswer, operator, disabled } = props;
-  console.log(disabled);
 
   return (
     <div className={`${styles['steerContainer']}`}>
@@ -80,36 +85,47 @@ const Steer: FC<SteerProps> = (props) => {
 };
 
 const Asteroid: FC<AsteroidProps> = (props) => {
-  const { number, index, direction } = props;
-
-  const [position, setPosition] = useState('normal');
-
-  useEffect(() => {
-    if (index === 1) {
-      setPosition('middle');
-    }
-    if (index === 2) {
-      setPosition('bottom');
-    }
-  }, [index]);
+  const { number } = props;
 
   return (
-    <div className={`${styles['asteroidBox']} ${styles[position]}`}>
-      <p className={`${styles['asteroidNumber']} `}>{number}</p>
-    </div>
+    <>
+      <div className={`${styles['asteroidBox']} ${styles['top']}`}>
+        <p className={`${styles['asteroidNumber']} `}>{number.one}</p>
+      </div>
+
+      <div className={`${styles['asteroidBox']} ${styles['middle']}`}>
+        <p className={`${styles['asteroidNumber']} `}>{number.two}</p>
+      </div>
+
+      <div className={`${styles['asteroidBox']} ${styles['bottom']}`}>
+        <p className={`${styles['asteroidNumber']} `}>{number.three}</p>
+      </div>
+    </>
   );
 };
 
 const NumericalTest: NextPage = () => {
-  const [questionLeft] = useState<AsteroidProps['number'][]>([9, 3, 5]);
-  const [questionRight] = useState<AsteroidProps['number'][]>([7, 4, 2]);
+  const [questionLeft] = useState<AsteroidProps['number'][]>([
+    { one: 1, two: 2, three: 3 },
+    { one: 3, two: 3, three: 7 },
+    { one: 9, two: 2, three: 1 },
+    { one: 5, two: 2, three: 4 },
+  ]);
+
+  const [questionRight] = useState<AsteroidProps['number'][]>([
+    { one: 5, two: 1, three: 5 },
+    { one: 7, two: 2, three: 6 },
+    { one: 2, two: 3, three: 7 },
+    { one: 5, two: 4, three: 8 },
+  ]);
   const [operator] = useState<string>('+');
 
   const [visible, setVisible] = useState<boolean>(true);
-  const [rightAnswer, setRightAnswer] = useState<string>('');
+  const [renderItem, setRenderItem] = useState<number>(0);
   const [userAnswer, setUserAnswer] = useState<string>('');
-  const [leftBgColor, setLeftBgColor] = useState<string>('normal');
-  const [rightBgColor, setRightBgColor] = useState<string>('normal');
+  const [rightAnswer, setRightAnswer] = useState<string>('');
+  const [leftBgColor, setLeftBgColor] = useState<string>('');
+  const [rightBgColor, setRightBgColor] = useState<string>('');
 
   const [currentCount, setCount] = useState<number>(0);
 
@@ -119,18 +135,30 @@ const NumericalTest: NextPage = () => {
 
     if (operator === '+') {
       totalLeft =
-        totalLeft + questionLeft[0] + questionLeft[1] + questionLeft[2];
+        totalLeft +
+        questionLeft[renderItem].one +
+        questionLeft[renderItem].two +
+        questionLeft[renderItem].three;
 
       totalRight =
-        totalRight + questionRight[0] + questionRight[1] + questionRight[2];
+        totalRight +
+        questionRight[renderItem].one +
+        questionRight[renderItem].two +
+        questionRight[renderItem].three;
     }
 
     if (operator === 'x') {
       totalLeft =
-        totalLeft + questionLeft[0] * questionLeft[1] * questionLeft[2];
+        totalLeft +
+        questionLeft[renderItem].one *
+          questionLeft[renderItem].two *
+          questionLeft[renderItem].three;
 
       totalRight =
-        totalRight + questionRight[0] * questionRight[1] * questionRight[2];
+        totalRight +
+        questionRight[renderItem].one *
+          questionRight[renderItem].two *
+          questionRight[renderItem].three;
     }
 
     if (totalLeft < totalRight) {
@@ -139,7 +167,7 @@ const NumericalTest: NextPage = () => {
     if (totalLeft > totalRight) {
       setRightAnswer('right');
     }
-  }, [operator, questionLeft, questionRight]);
+  }, [operator, questionLeft, questionRight, renderItem]);
 
   useEffect(() => {
     if (currentCount >= 0 && visible === false) {
@@ -147,8 +175,8 @@ const NumericalTest: NextPage = () => {
       const id = setInterval(timer, 1000);
       return () => clearInterval(id);
     } else {
-      setLeftBgColor('normal');
-      setRightBgColor('normal');
+      setLeftBgColor('');
+      setRightBgColor('');
       setVisible(true);
     }
   }, [currentCount, visible]);
@@ -156,23 +184,27 @@ const NumericalTest: NextPage = () => {
   const onAnswer: (value: string) => void = (value) => {
     setVisible(false);
     setUserAnswer(value);
-    setCount(1);
+    setCount(2);
+    setRenderItem(renderItem + 1);
   };
 
   useEffect(() => {
-    if (rightAnswer === 'left' && userAnswer === 'left') {
-      setLeftBgColor('green');
+    if (visible === false) {
+      if (rightAnswer === 'left' && userAnswer === 'left') {
+        setLeftBgColor('green');
+      }
+      if (rightAnswer === 'right' && userAnswer === 'left') {
+        setLeftBgColor('red');
+        console.log('jalan');
+      }
+      if (rightAnswer === 'right' && userAnswer === 'right') {
+        setRightBgColor('green');
+      }
+      if (rightAnswer === 'left' && userAnswer === 'right') {
+        setRightBgColor('red');
+      }
     }
-    if (rightAnswer === 'right' && userAnswer === 'left') {
-      setLeftBgColor('red');
-    }
-    if (rightAnswer === 'right' && userAnswer === 'right') {
-      setRightBgColor('green');
-    }
-    if (rightAnswer === 'left' && userAnswer === 'right') {
-      setRightBgColor('red');
-    }
-  }, [rightAnswer, userAnswer]);
+  }, [rightAnswer, userAnswer, visible]);
 
   return (
     <div className={`${styles['container']} `}>
@@ -188,20 +220,17 @@ const NumericalTest: NextPage = () => {
           <Steer
             operator={operator}
             onAnswer={(value) => onAnswer(value)}
-            disabled={!visible}
+            disabled={!visible || renderItem >= questionLeft.length - 1}
           />
-          {visible && (
+          {visible && renderItem < questionLeft.length - 1 && (
             <div className={`${styles['asteroidContainer']} `}>
               <div className={`${styles['asteroidScreen']} `}>
-                {questionLeft.map((data, index) => {
-                  return <Asteroid number={data} index={index} key={index} />;
-                })}
+                <Asteroid number={questionLeft[renderItem]} />
+                );
               </div>
 
               <div className={`${styles['asteroidScreen']} `}>
-                {questionRight.map((data, index) => {
-                  return <Asteroid number={data} index={index} key={index} />;
-                })}
+                <Asteroid number={questionRight[renderItem]} />
               </div>
             </div>
           )}

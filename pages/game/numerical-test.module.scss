@@ -120,6 +120,10 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  &:disabled {
+    cursor: no-drop;
+  }
 }
 
 .triangleRightButton {
@@ -130,6 +134,10 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  &:disabled {
+    cursor: no-drop;
+  }
 }
 
 // Guide screen
@@ -179,7 +187,7 @@
   justify-content: center;
 }
 
-.normal {
+.top {
   top: 50px;
   left: 150px;
 }
