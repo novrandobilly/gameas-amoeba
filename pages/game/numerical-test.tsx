@@ -35,9 +35,7 @@ const Guide: FC<GuideProps> = (props) => {
   return (
     <div className={`${styles['guideContainer']} `}>
       <div className={`${styles['guideScreen']} ${styles[`${leftBgColor}`]}`} />
-      <div
-        className={`${styles['guideScreen']} ${styles[`${rightBgColor}`]}`}
-      />
+      <div className={`${styles['guideScreen']} ${styles[`${rightBgColor}`]}`} />
     </div>
   );
 };
@@ -53,13 +51,7 @@ const Steer: FC<SteerProps> = (props) => {
         </div>
         <div className={`${styles['ovalShadow']}`}></div>
 
-        <Image
-          src={SteerImage}
-          alt='Steering-wheel'
-          width={1000}
-          height={200}
-          layout='fixed'
-        />
+        <Image src={SteerImage} alt='Steering-wheel' width={1000} height={200} layout='fixed' />
         <div className={`${styles['selectorWrapper']}`}>
           <div className={`${styles['triangleLeft']}`} />
           <button
@@ -135,30 +127,18 @@ const NumericalTest: NextPage = () => {
 
     if (operator === '+') {
       totalLeft =
-        totalLeft +
-        questionLeft[renderItem].one +
-        questionLeft[renderItem].two +
-        questionLeft[renderItem].three;
+        totalLeft + questionLeft[renderItem].one + questionLeft[renderItem].two + questionLeft[renderItem].three;
 
       totalRight =
-        totalRight +
-        questionRight[renderItem].one +
-        questionRight[renderItem].two +
-        questionRight[renderItem].three;
+        totalRight + questionRight[renderItem].one + questionRight[renderItem].two + questionRight[renderItem].three;
     }
 
     if (operator === 'x') {
       totalLeft =
-        totalLeft +
-        questionLeft[renderItem].one *
-          questionLeft[renderItem].two *
-          questionLeft[renderItem].three;
+        totalLeft + questionLeft[renderItem].one * questionLeft[renderItem].two * questionLeft[renderItem].three;
 
       totalRight =
-        totalRight +
-        questionRight[renderItem].one *
-          questionRight[renderItem].two *
-          questionRight[renderItem].three;
+        totalRight + questionRight[renderItem].one * questionRight[renderItem].two * questionRight[renderItem].three;
     }
 
     if (totalLeft < totalRight) {

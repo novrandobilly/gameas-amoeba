@@ -73,7 +73,7 @@ const Game: NextPage = () => {
             Game I: Numerical Ability
           </button>
         </Link>
-        <Link href='/game/problem-solving'>
+        <Link href='/game/problem-solving-test'>
           <button disabled={status !== 'authenticated'} className={styles['problem-solving-button']}>
             Game II: Problem Solving
           </button>

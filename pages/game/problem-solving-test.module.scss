@@ -1,0 +1,11 @@
+.test-section {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+}
+
+.dragging {
+  opacity: 0.5;
+}
