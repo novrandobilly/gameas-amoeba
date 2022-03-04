@@ -15,14 +15,14 @@ const Problem1: FC<ProblemSolvingType> = ({
   onDragEndHandler,
   onClickHandler,
 }) => {
-  const [chunk1, setChunk1] = useState<number>(180);
-  const [chunk2, setChunk2] = useState<number>(270);
-  const [chunk3, setChunk3] = useState<number>(0);
-  const [chunk4, setChunk4] = useState<number>(90);
-  const [chunkOrder, setChunkOrder] = useState<{ order: number; rotateValue: number }[]>([]);
+  const [chunkOrder, setChunkOrder] = useState<{ order: number | null; rotateValue: number | null }[]>([]);
 
   const onDragOverAnswer = (event: DragEvent<HTMLDivElement>) => {
+    // Get container Id for determine index
     const containerId = onDragOverHandler(event);
+    const Id = parseInt(containerId.replace('answer-box-', ''));
+
+    // Get rotate value
     const element = document.querySelector('.dragging');
     const elementStyle = element?.getAttribute('style');
     const rotateVal = elementStyle
@@ -30,22 +30,51 @@ const Problem1: FC<ProblemSolvingType> = ({
       .filter((char) => !isNaN(parseInt(char)))
       .join('');
 
-    const Id = parseInt(containerId.replace('answer-box-', ''));
-
     if (element && rotateVal) {
+      // Get order value
       const elementClass = element.getAttribute('class');
       const classValue = elementClass?.split(' ').filter((cls) => cls.includes('value'));
+
+      // update chunk order value
       if (classValue) {
         const value = parseInt(classValue[0].replace('value-', ''));
         setChunkOrder((prevState) => {
           const newState = [...prevState];
           const newAnswer = {
-            rotateValue: parseInt(rotateVal),
+            rotateValue: parseInt(rotateVal) % 360,
             order: value,
           };
           newState[Id - 1] = newAnswer;
           return newState;
         });
+      }
+    }
+  };
+
+  const onDragOverOption = (event: DragEvent<HTMLDivElement>) => {
+    const containerId = onDragOverHandler(event);
+    const element = document.querySelector('.dragging');
+
+    if (element && containerId === 'option-box') {
+      const elementClass = element.getAttribute('class');
+      const classValue = elementClass?.split(' ').filter((cls) => cls.includes('value'));
+
+      if (classValue) {
+        const value = parseInt(classValue[0].replace('value-', ''));
+        const chunkIndex = chunkOrder.findIndex((chunk) => {
+          return chunk?.order === value;
+        });
+
+        if (chunkIndex !== -1) {
+          setChunkOrder((prevState) => {
+            const newState = [...prevState];
+            newState[chunkIndex] = {
+              order: null,
+              rotateValue: null,
+            };
+            return newState;
+          });
+        }
       }
     }
   };
@@ -71,7 +100,31 @@ const Problem1: FC<ProblemSolvingType> = ({
     }
   };
 
-  console.log(chunkOrder);
+  //   USE hasChildNodes() to increase validation
+  useEffect(() => {
+    const answerBoxArr = Array.from(document.querySelectorAll(`.${styles['puzzle-box']}`));
+    let answerIsCorrect = true;
+    answerBoxArr.forEach((box) => {
+      answerIsCorrect = box.hasChildNodes() && answerIsCorrect;
+    });
+
+    if (answerIsCorrect) {
+      chunkOrder.forEach((chunk, index) => {
+        answerIsCorrect = answerIsCorrect && chunk.order === index + 1 && chunk.rotateValue === 0;
+      });
+    }
+    console.log(chunkOrder);
+
+    if (answerIsCorrect) alert('Correct!');
+  }, [chunkOrder]);
+
+  // Remove border when node is filled
+  useEffect(() => {
+    const answerBoxArr = Array.from(document.querySelectorAll(`.${styles['puzzle-box']}`));
+    answerBoxArr.forEach((box) => {
+      box.setAttribute('style', box.hasChildNodes() ? 'border:none' : 'border:""');
+    });
+  }, [chunkOrder]);
 
   return (
     <Fragment>
@@ -85,7 +138,7 @@ const Problem1: FC<ProblemSolvingType> = ({
         </div>
       </div>
 
-      <div className={styles['answer-section']} id='option-box' onDragOver={onDragOverHandler}>
+      <div className={styles['answer-section']} id='option-box' onDragOver={onDragOverOption}>
         <div
           className={`${styles['puzzle-item']} ${styles['chunk-2']} value-2`}
           draggable
