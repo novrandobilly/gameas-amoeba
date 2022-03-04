@@ -2,6 +2,9 @@ import type { NextPage } from 'next';
 import { DragEvent, MouseEvent as MouseEventClick, useState } from 'react';
 import Problem1 from '../../components/problem-solving/problem-1';
 import Problem2 from '../../components/problem-solving/problem-2';
+import Problem3 from '../../components/problem-solving/problem-3';
+import Problem4 from '../../components/problem-solving/problem-4';
+import Problem5 from '../../components/problem-solving/problem-5';
 
 import Head from 'next/head';
 import styles from './problem-solving-test.module.scss';
@@ -65,6 +68,33 @@ const ProblemSolving: NextPage = () => {
           )}
           {testPhase === 2 && (
             <Problem2
+              onDragOverHandler={onDragOverHandler}
+              onDragStartHandler={onDragStartHandler}
+              onDragEndHandler={onDragEndHandler}
+              onClickHandler={onClickHandler}
+              setTestPhase={setTestPhase}
+            />
+          )}
+          {testPhase === 3 && (
+            <Problem3
+              onDragOverHandler={onDragOverHandler}
+              onDragStartHandler={onDragStartHandler}
+              onDragEndHandler={onDragEndHandler}
+              onClickHandler={onClickHandler}
+              setTestPhase={setTestPhase}
+            />
+          )}
+          {testPhase === 4 && (
+            <Problem4
+              onDragOverHandler={onDragOverHandler}
+              onDragStartHandler={onDragStartHandler}
+              onDragEndHandler={onDragEndHandler}
+              onClickHandler={onClickHandler}
+              setTestPhase={setTestPhase}
+            />
+          )}
+          {testPhase === 5 && (
+            <Problem5
               onDragOverHandler={onDragOverHandler}
               onDragStartHandler={onDragStartHandler}
               onDragEndHandler={onDragEndHandler}

@@ -1,15 +1,27 @@
 import { FC, DragEvent, Fragment, useState, useEffect } from 'react';
 import { MouseEvent as MouseEventClick } from 'react';
 import { ProblemSolvingType } from '../../lib/utilityTypes';
-import styles from './problem-2.module.scss';
+import styles from './problem-5.module.scss';
 
 const initialData = [
   { order: null, rotateValue: null },
   { order: null, rotateValue: null },
   { order: null, rotateValue: null },
   { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
+  { order: null, rotateValue: null },
 ];
-const Problem2: FC<ProblemSolvingType> = ({
+const Problem5: FC<ProblemSolvingType> = ({
   onDragStartHandler,
   onDragOverHandler,
   onDragEndHandler,
@@ -134,7 +146,7 @@ const Problem2: FC<ProblemSolvingType> = ({
     }
     if (answerIsCorrect) {
       alert('Correct!');
-      setTestPhase(3);
+      setTestPhase(6);
     }
   }, [chunkOrder]);
 
@@ -155,6 +167,18 @@ const Problem2: FC<ProblemSolvingType> = ({
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-2'></div>
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-3'></div>
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-4'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-5'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-6'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-7'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-8'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-9'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-10'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-11'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-12'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-13'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-14'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-15'></div>
+          <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-16'></div>
         </div>
       </div>
 
@@ -187,9 +211,93 @@ const Problem2: FC<ProblemSolvingType> = ({
           onDragEnd={onDragEndHandler}
           onClick={onRotateAnswer}
           style={{ transform: 'rotate(0deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-7']} value-7`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(270deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-9']} value-9`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-5']} value-5`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(90deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-8']} value-8`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(0deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-6']} value-6`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-14']} value-14`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-13']} value-13`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-11']} value-11`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-16']} value-16`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-12']} value-12`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-10']} value-10`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
+        <div
+          className={`${styles['puzzle-item']} ${styles['chunk-15']} value-15`}
+          draggable
+          onDragStart={onDragStartHandler}
+          onDragEnd={onDragEndHandler}
+          onClick={onRotateAnswer}
+          style={{ transform: 'rotate(180deg)' }}></div>
       </div>
     </Fragment>
   );
 };
 
-export default Problem2;
+export default Problem5;
