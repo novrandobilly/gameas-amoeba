@@ -1,12 +1,13 @@
 import type { NextPage } from 'next';
-import { MouseEvent as MouseEventClick, useRef } from 'react';
-import type { DragEvent } from 'react';
+import { DragEvent, MouseEvent as MouseEventClick, useState } from 'react';
 import Problem1 from '../../components/problem-solving/problem-1';
+import Problem2 from '../../components/problem-solving/problem-2';
 
 import Head from 'next/head';
 import styles from './problem-solving-test.module.scss';
 
 const ProblemSolving: NextPage = () => {
+  const [testPhase, setTestPhase] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
   const onDragStartHandler = (event: DragEvent<HTMLDivElement>) => {
     const item = event.target as HTMLElement;
     item.classList.add(styles['dragging']);
@@ -43,7 +44,6 @@ const ProblemSolving: NextPage = () => {
       rotateVal: newRotateVal % 360,
     };
   };
-
   return (
     <div>
       <Head>
@@ -54,12 +54,24 @@ const ProblemSolving: NextPage = () => {
 
       <main>
         <section className={styles['test-section']}>
-          <Problem1
-            onDragOverHandler={onDragOverHandler}
-            onDragStartHandler={onDragStartHandler}
-            onDragEndHandler={onDragEndHandler}
-            onClickHandler={onClickHandler}
-          />
+          {testPhase === 1 && (
+            <Problem1
+              onDragOverHandler={onDragOverHandler}
+              onDragStartHandler={onDragStartHandler}
+              onDragEndHandler={onDragEndHandler}
+              onClickHandler={onClickHandler}
+              setTestPhase={setTestPhase}
+            />
+          )}
+          {testPhase === 2 && (
+            <Problem2
+              onDragOverHandler={onDragOverHandler}
+              onDragStartHandler={onDragStartHandler}
+              onDragEndHandler={onDragEndHandler}
+              onClickHandler={onClickHandler}
+              setTestPhase={setTestPhase}
+            />
+          )}
         </section>
       </main>
     </div>

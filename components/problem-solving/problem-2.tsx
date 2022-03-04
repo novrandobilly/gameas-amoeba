@@ -1,7 +1,7 @@
 import { FC, DragEvent, Fragment, useState, useEffect } from 'react';
 import { MouseEvent as MouseEventClick } from 'react';
 import { ProblemSolvingType } from '../../lib/utilityTypes';
-import styles from './problem-1.module.scss';
+import styles from './problem-2.module.scss';
 
 const initialData = [
   { order: null, rotateValue: null },
@@ -9,7 +9,7 @@ const initialData = [
   { order: null, rotateValue: null },
   { order: null, rotateValue: null },
 ];
-const Problem1: FC<ProblemSolvingType> = ({
+const Problem2: FC<ProblemSolvingType> = ({
   onDragStartHandler,
   onDragOverHandler,
   onDragEndHandler,
@@ -192,4 +192,4 @@ const Problem1: FC<ProblemSolvingType> = ({
   );
 };
 
-export default Problem1;
+export default Problem2;
