@@ -65,10 +65,6 @@ const Story: FC<TextProps> = (props) => {
   );
 };
 
-const Guide = () => {
-  return <div className={styles['guideContainer']} />;
-};
-
 const Panel: FC<PanelProps> = (props) => {
   const { border } = props;
   return (
@@ -241,7 +237,14 @@ const NumericalIntro: FC<NumericProps> = (props) => {
 
           {counter >= 10 && (
             <>
-              <Guide /> <Panel border={renderBorder} />{' '}
+              <div
+                className={
+                  counter === 11
+                    ? styles['guideContainerRed']
+                    : styles['guideContainer']
+                }
+              />{' '}
+              <Panel border={renderBorder} />{' '}
             </>
           )}
 
