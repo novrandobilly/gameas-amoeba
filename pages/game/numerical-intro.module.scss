@@ -90,16 +90,18 @@
 }
 
 .startButton {
-  background-color: transparent;
+  background-color: #4cd71c;
   color: white;
   border: none;
   font-size: 2rem;
   font-weight: bold;
   position: absolute;
-  bottom: 17%;
-  width: 300px;
+  bottom: 40%;
+  left: 30%;
+  width: 200px;
   height: 80px;
   cursor: pointer;
+  z-index: 30;
 }
 
 // Story display
@@ -161,6 +163,12 @@
   background-size: cover;
   height: 35vh;
   margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 6rem;
+  font-weight: bold;
 }
 
 .ornament {
@@ -199,4 +207,53 @@
 
 .top {
   top: 8%;
+}
+
+.middle {
+  top: 35%;
+  left: 15%;
+}
+
+// question box
+.questionContainer {
+  z-index: 30;
+  width: 70vw;
+  height: 80vh;
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.questionDomain {
+  width: 34.5vw;
+  height: 40vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.questionBox {
+  width: 22vw;
+  height: 13vh;
+  background-color: rgb(151, 81, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 30%;
+  left: 20%;
+  cursor: pointer;
+}
+
+.questionText {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.icon {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
 }

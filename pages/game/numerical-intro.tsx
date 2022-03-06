@@ -3,8 +3,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { NextPage } from 'next';
+import { QuestionBoxProps, QuizProps } from './numerical-test';
+
 import ProctorImage from '../../assets/Proctoring.png';
-import SteerImage from '../../assets/Steering.png';
+import RightIcon from '../../assets/Right-icon.png';
+import WrongIcon from '../../assets/Wrong-icon.png';
 
 import styles from './numerical-intro.module.scss';
 
@@ -32,6 +35,8 @@ interface explanationProps {
 
 interface PanelProps {
   border: string;
+  value?: number;
+  counter: number;
 }
 
 const Proctor: FC<IntroProps> = (props) => {
@@ -66,11 +71,13 @@ const Story: FC<TextProps> = (props) => {
 };
 
 const Panel: FC<PanelProps> = (props) => {
-  const { border } = props;
+  const { border, counter, value } = props;
   return (
     <div className={styles['panelContainer']}>
       <div className={styles['ornament']} />
-      <div className={`${styles['panel']} ${styles[border]}`} />
+      <div className={`${styles['panel']} ${styles[border]}`}>
+        {counter <= 15 && value}
+      </div>
       <div className={styles['ornament']} />
     </div>
   );
@@ -86,6 +93,25 @@ const Explaination: FC<ExplainationProps> = (props) => {
   );
 };
 
+const QuestionBox: FC<QuestionBoxProps> = (props) => {
+  const { rightAnswer, question, onAnswer, value, icon } = props;
+  return (
+    <div className={styles['questionBox']} onClick={onAnswer}>
+      <p className={styles['questionText']}>{question}</p>
+
+      {icon && (
+        <div className={styles['icon']}>
+          {rightAnswer === value ? (
+            <Image src={RightIcon} width={20} height={20} alt='indicator' />
+          ) : (
+            <Image src={WrongIcon} width={20} height={20} alt='indicator' />
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const NumericalIntro: FC<NumericProps> = (props) => {
   const { nama } = props;
 
@@ -94,7 +120,19 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   const [renderPosition, setRenderPosition] = useState<string>('');
 
   const [visible, setVisible] = useState<boolean>(false);
-  const [counter, setCounter] = useState<number>(10);
+  const [counter, setCounter] = useState<number>(0);
+
+  const [iconVisible, setIconVisible] = useState<boolean>(false);
+  const [renderItem, setRenderItem] = useState<number>(0);
+
+  const [question] = useState<QuizProps>({
+    topLeft: [{ ask: '12 + 3 x 4' }, { ask: '18 + 5 x 2' }],
+    topRight: [{ ask: '20 x 3 + 10' }, { ask: '14 - 9 x 1' }],
+    bottomLeft: [{ ask: '18 - 8 x 9' }, { ask: '5 + 3 x 10' }],
+    bottomRight: [{ ask: '15 x 6 : 7' }, { ask: '20 + 3 x 2' }],
+  });
+  const [result] = useState<number[]>([70, 80]);
+  const [rightAnswer] = useState<string[]>(['topRight', 'bottomLeft']);
 
   const [story] = useState([
     { id: 1, text: `hi ${nama}, selamat datang di ruang kendali!` },
@@ -143,8 +181,15 @@ const NumericalIntro: FC<NumericProps> = (props) => {
     },
     {
       id: 11,
-      text: `Dan pada kolom ini akan muncul temperatur 
-      yang diperlukan`,
+      text: `Kita coba berlatih satu kali lagi`,
+    },
+    {
+      id: 12,
+      text: `Pilih jawaban secepat mungkin!`,
+    },
+    {
+      id: 13,
+      text: `Klik tombol 'Start' apabila Anda sudah siap`,
     },
   ]);
 
@@ -190,10 +235,24 @@ const NumericalIntro: FC<NumericProps> = (props) => {
 
   const addCounter = () => {
     setCounter(counter + 1);
+    setIconVisible(false);
+    if (counter === 13 && renderItem < rightAnswer.length - 1) {
+      setRenderItem(renderItem + 1);
+    }
   };
 
   const substractCounter = () => {
     setCounter(counter - 1);
+    setIconVisible(false);
+    if (counter === 14 && renderItem > 0) {
+      setRenderItem(renderItem - 1);
+    }
+  };
+
+  const onAnswer: () => void = () => {
+    if (counter >= 13 && counter != 14) {
+      setIconVisible(true);
+    }
   };
 
   return (
@@ -228,7 +287,7 @@ const NumericalIntro: FC<NumericProps> = (props) => {
               <button
                 className={styles['button']}
                 onClick={() => addCounter()}
-                disabled={counter >= 13}
+                disabled={counter >= 17}
               >
                 {'>'}
               </button>
@@ -244,11 +303,15 @@ const NumericalIntro: FC<NumericProps> = (props) => {
                     : styles['guideContainer']
                 }
               />{' '}
-              <Panel border={renderBorder} />{' '}
+              <Panel
+                border={renderBorder}
+                value={result[renderItem]}
+                counter={counter}
+              />{' '}
             </>
           )}
 
-          {counter >= 10 && counter <= 13 && (
+          {counter >= 10 && counter <= 12 && (
             <>
               <Explaination
                 text={story[counter - 3].text}
@@ -262,11 +325,67 @@ const NumericalIntro: FC<NumericProps> = (props) => {
             </>
           )}
 
-          {/* {counter === 13 && (
-            <button className={`${styles['startButton']}`}>
+          {counter === 14 && (
+            <>
+              <Explaination
+                text={story[counter - 4].text}
+                position={renderPosition}
+              />
+            </>
+          )}
+
+          {counter >= 16 && (
+            <>
+              <Explaination text={story[counter - 5].text} position='middle' />
+            </>
+          )}
+
+          {counter >= 11 && counter <= 15 && (
+            <div className={styles['questionContainer']}>
+              <div className={styles['questionDomain']}>
+                <QuestionBox
+                  onAnswer={() => onAnswer()}
+                  question={question.topLeft[renderItem].ask}
+                  rightAnswer={rightAnswer[renderItem]}
+                  icon={iconVisible}
+                  value='topLeft'
+                />
+              </div>
+              <div className={styles['questionDomain']}>
+                <QuestionBox
+                  onAnswer={() => onAnswer()}
+                  question={question.topRight[renderItem].ask}
+                  rightAnswer={rightAnswer[renderItem]}
+                  icon={iconVisible}
+                  value='topRight'
+                />
+              </div>
+              <div className={styles['questionDomain']}>
+                <QuestionBox
+                  onAnswer={() => onAnswer()}
+                  question={question.bottomLeft[renderItem].ask}
+                  rightAnswer={rightAnswer[renderItem]}
+                  icon={iconVisible}
+                  value='bottomLeft'
+                />
+              </div>
+              <div className={styles['questionDomain']}>
+                <QuestionBox
+                  onAnswer={() => onAnswer()}
+                  question={question.bottomRight[renderItem].ask}
+                  rightAnswer={rightAnswer[renderItem]}
+                  icon={iconVisible}
+                  value='bottomRight'
+                />
+              </div>
+            </div>
+          )}
+
+          {counter === 17 && (
+            <button className={styles['startButton']}>
               <Link href='/game/numerical-test'>Mulai</Link>
             </button>
-          )} */}
+          )}
         </div>
       </main>
     </div>

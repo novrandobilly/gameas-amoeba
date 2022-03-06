@@ -2,29 +2,30 @@ import React, { FC, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
+import { NumericalData } from '../../lib/numerical-data';
 
 import RightIcon from '../../assets/Right-icon.png';
 import WrongIcon from '../../assets/Wrong-icon.png';
 
 import styles from './numerical-test.module.scss';
 
-interface QuizProps {
+export interface QuizProps {
   topLeft: { ask: string }[];
   topRight: { ask: string }[];
   bottomLeft: { ask: string }[];
   bottomRight: { ask: string }[];
 }
 
-interface PanelProps {
+export interface PanelProps {
   result: number;
 }
 
-interface QuestionBoxProps {
+export interface QuestionBoxProps {
   question: string;
-  onAnswer: () => void;
+  onAnswer?: () => void;
   icon: boolean;
   rightAnswer: string;
-  value: string;
+  value?: string;
 }
 
 const Panel: FC<PanelProps> = (props) => {
@@ -58,39 +59,41 @@ const QuestionBox: FC<QuestionBoxProps> = (props) => {
 };
 
 const NumericalTest: NextPage = () => {
-  const [question] = useState<QuizProps>({
-    topLeft: [
-      { ask: '12 + 3 x 4' },
-      { ask: '18 + 5 x 2' },
-      { ask: '6 x 30 : 3' },
-      { ask: '72 : 3 x 5' },
-    ],
-    topRight: [
-      { ask: '20 x 3 + 10' },
-      { ask: '14 - 9 x 1' },
-      { ask: '32 - 9 x 4' },
-      { ask: '186 + 34 - 70' },
-    ],
-    bottomLeft: [
-      { ask: '18 - 8 x 9' },
-      { ask: '5 + 3 x 10' },
-      { ask: '64 + 3 : 5' },
-      { ask: '63 - 23 : 3' },
-    ],
-    bottomRight: [
-      { ask: '15 x 6 : 7' },
-      { ask: '20 + 3 x 2' },
-      { ask: '196 + 5 - 98' },
-      { ask: '5 x 5 x 2' },
-    ],
-  });
-  const [result] = useState<number[]>([70, 80, 60, 50]);
-  const [rightAnswer] = useState<string[]>([
-    'topRight',
-    'bottomLeft',
-    'topLeft',
-    'bottomRight',
-  ]);
+  const { question, result, rightAnswer } = NumericalData();
+
+  // const [question] = useState<QuizProps>({
+  //   topLeft: [
+  //     { ask: '12 + 3 x 4' },
+  //     { ask: '18 + 5 x 2' },
+  //     { ask: '6 x 30 : 3' },
+  //     { ask: '72 : 3 x 5' },
+  //   ],
+  //   topRight: [
+  //     { ask: '20 x 3 + 10' },
+  //     { ask: '14 - 9 x 1' },
+  //     { ask: '32 - 9 x 4' },
+  //     { ask: '186 + 34 - 70' },
+  //   ],
+  //   bottomLeft: [
+  //     { ask: '18 - 8 x 9' },
+  //     { ask: '5 + 3 x 10' },
+  //     { ask: '64 + 3 : 5' },
+  //     { ask: '63 - 23 : 3' },
+  //   ],
+  //   bottomRight: [
+  //     { ask: '15 x 6 : 7' },
+  //     { ask: '20 + 3 x 2' },
+  //     { ask: '196 + 5 - 98' },
+  //     { ask: '5 x 5 x 2' },
+  //   ],
+  // });
+  // const [result] = useState<number[]>([70, 80, 60, 50]);
+  // const [rightAnswer] = useState<string[]>([
+  //   'topRight',
+  //   'bottomLeft',
+  //   'topLeft',
+  //   'bottomRight',
+  // ]);
 
   const [iconVisible, setIconVisible] = useState<boolean>(false);
   const [renderItem, setRenderItem] = useState<number>(0);
