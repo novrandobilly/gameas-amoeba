@@ -1,0 +1,63 @@
+.problem-section {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto 50px;
+  .puzzle-container {
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    .puzzle-box {
+      width: 150px;
+      height: 150px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+    }
+  }
+  .puzzle-problem {
+    background-image: url('../../assets/problem-solving/1_2x2/main.png');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.answer-section {
+  width: 100%;
+  max-width: 1000px;
+  height: 200px;
+  border: 1px solid #000;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.puzzle-item {
+  width: 150px;
+  height: 150px;
+  cursor: move;
+  transition: transform 0.2s ease-in-out;
+}
+.chunk-1 {
+  background-image: url('../../assets/problem-solving/1_2x2/chunk_1.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-2 {
+  background-image: url('../../assets/problem-solving/1_2x2/chunk_2.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-3 {
+  background-image: url('../../assets/problem-solving/1_2x2/chunk_3.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-4 {
+  background-image: url('../../assets/problem-solving/1_2x2/chunk_4.png');
+  background-size: cover;
+  background-position: center;
+}

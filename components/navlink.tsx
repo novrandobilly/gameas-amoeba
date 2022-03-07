@@ -15,7 +15,6 @@ const NavLink: FC<NavLinkTypes> = ({ children, href, exact }) => {
   let navlinkStyles: string = ``;
 
   if (isActive) navlinkStyles += ` ${styles['active']}`;
-  console.log(navlinkStyles);
 
   return (
     <Link href={href}>

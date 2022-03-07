@@ -1,0 +1,90 @@
+.problem-section {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto 25px;
+  .puzzle-container {
+    width: 360px;
+    height: 360px;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    .puzzle-box {
+      width: 120px;
+      height: 120px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+    }
+  }
+  .puzzle-problem {
+    background-image: url('../../assets/problem-solving/4_3x3/main.png');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.answer-section {
+  width: 100%;
+  max-width: 700px;
+  height: 280px;
+  border: 1px solid #000;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+.puzzle-item {
+  width: 120px;
+  height: 120px;
+  cursor: move;
+  transition: transform 0.2s ease-in-out;
+}
+.chunk-1 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_1.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-2 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_2.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-3 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_3.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-4 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_4.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-5 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_5.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-6 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_6.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-7 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_7.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-8 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_8.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-9 {
+  background-image: url('../../assets/problem-solving/4_3x3/chunk_9.png');
+  background-size: cover;
+  background-position: center;
+}
