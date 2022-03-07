@@ -27,6 +27,7 @@ const Problem5: FC<ProblemSolvingType> = ({
   onDragEndHandler,
   onClickHandler,
   setTestPhase,
+  setAnswerResult,
 }) => {
   const [chunkOrder, setChunkOrder] = useState<{ order: number | null; rotateValue: number | null }[]>(initialData);
 
@@ -145,7 +146,15 @@ const Problem5: FC<ProblemSolvingType> = ({
       });
     }
     if (answerIsCorrect) {
-      alert('Correct!');
+      setAnswerResult((prevState) => {
+        const newState = { ...prevState };
+        newState[5] = {
+          ...newState[5],
+          isCorrect: true,
+          time: null,
+        };
+        return newState;
+      });
       setTestPhase(6);
     }
   }, [chunkOrder]);

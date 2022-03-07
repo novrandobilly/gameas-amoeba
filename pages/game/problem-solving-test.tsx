@@ -5,12 +5,37 @@ import Problem2 from '../../components/problem-solving/problem-2';
 import Problem3 from '../../components/problem-solving/problem-3';
 import Problem4 from '../../components/problem-solving/problem-4';
 import Problem5 from '../../components/problem-solving/problem-5';
+import { answerType } from '../../lib/utilityTypes';
 
 import Head from 'next/head';
 import styles from './problem-solving-test.module.scss';
 
+const initialAnswer = {
+  1: {
+    isCorrect: false,
+    time: null,
+  },
+  2: {
+    isCorrect: false,
+    time: null,
+  },
+  3: {
+    isCorrect: false,
+    time: null,
+  },
+  4: {
+    isCorrect: false,
+    time: null,
+  },
+  5: {
+    isCorrect: false,
+    time: null,
+  },
+};
+
 const ProblemSolving: NextPage = () => {
-  const [testPhase, setTestPhase] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
+  const [testPhase, setTestPhase] = useState<number>(1);
+  const [answerResult, setAnswerResult] = useState<answerType>(initialAnswer);
   const onDragStartHandler = (event: DragEvent<HTMLDivElement>) => {
     const item = event.target as HTMLElement;
     item.classList.add(styles['dragging']);
@@ -47,6 +72,21 @@ const ProblemSolving: NextPage = () => {
       rotateVal: newRotateVal % 360,
     };
   };
+
+  const onBackHandler = () => {
+    setTestPhase((prevState) => {
+      if (prevState > 1 && prevState < 7) return (prevState -= 1);
+      return prevState;
+    });
+  };
+
+  const onPassHandler = () => {
+    setTestPhase((prevState) => {
+      if (prevState > 0 && prevState < 6) return (prevState += 1);
+      return prevState;
+    });
+  };
+
   return (
     <div>
       <Head>
@@ -64,6 +104,7 @@ const ProblemSolving: NextPage = () => {
               onDragEndHandler={onDragEndHandler}
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
+              setAnswerResult={setAnswerResult}
             />
           )}
           {testPhase === 2 && (
@@ -73,6 +114,7 @@ const ProblemSolving: NextPage = () => {
               onDragEndHandler={onDragEndHandler}
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
+              setAnswerResult={setAnswerResult}
             />
           )}
           {testPhase === 3 && (
@@ -82,6 +124,7 @@ const ProblemSolving: NextPage = () => {
               onDragEndHandler={onDragEndHandler}
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
+              setAnswerResult={setAnswerResult}
             />
           )}
           {testPhase === 4 && (
@@ -91,6 +134,7 @@ const ProblemSolving: NextPage = () => {
               onDragEndHandler={onDragEndHandler}
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
+              setAnswerResult={setAnswerResult}
             />
           )}
           {testPhase === 5 && (
@@ -100,8 +144,22 @@ const ProblemSolving: NextPage = () => {
               onDragEndHandler={onDragEndHandler}
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
+              setAnswerResult={setAnswerResult}
             />
           )}
+
+          <div className={styles['problem-navigation']}>
+            {testPhase > 1 && (
+              <button className={styles['back-button']} onClick={onBackHandler}>
+                Back
+              </button>
+            )}
+            {testPhase < 6 && (
+              <button className={styles['pass-button']} onClick={onPassHandler}>
+                Pass
+              </button>
+            )}
+          </div>
         </section>
       </main>
     </div>
