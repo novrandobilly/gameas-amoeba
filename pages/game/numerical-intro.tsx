@@ -118,6 +118,7 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   const [renderBackground, setRenderBackground] = useState<string>('');
   const [renderBorder, setRenderBorder] = useState<string>('');
   const [renderPosition, setRenderPosition] = useState<string>('');
+  const [userAnswer, setUserAnswer] = useState<string>('');
 
   const [visible, setVisible] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
@@ -236,6 +237,7 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   const addCounter = () => {
     setCounter(counter + 1);
     setIconVisible(false);
+    setUserAnswer('');
     if (counter === 13 && renderItem < rightAnswer.length - 1) {
       setRenderItem(renderItem + 1);
     }
@@ -244,6 +246,7 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   const substractCounter = () => {
     setCounter(counter - 1);
     setIconVisible(false);
+    setUserAnswer('');
     if (counter === 14 && renderItem > 0) {
       setRenderItem(renderItem - 1);
     }
@@ -252,8 +255,11 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   const onAnswer: () => void = () => {
     if (counter >= 13 && counter != 14) {
       setIconVisible(true);
+      setUserAnswer('answered');
     }
   };
+
+  console.log(counter);
 
   return (
     <div className={`${styles['container']} ${styles[`${renderBackground}`]}`}>
@@ -287,7 +293,11 @@ const NumericalIntro: FC<NumericProps> = (props) => {
               <button
                 className={styles['button']}
                 onClick={() => addCounter()}
-                disabled={counter >= 17}
+                disabled={
+                  counter >= 17 ||
+                  (counter === 13 && !userAnswer) ||
+                  (counter === 15 && !userAnswer)
+                }
               >
                 {'>'}
               </button>
