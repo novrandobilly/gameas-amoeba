@@ -11,6 +11,9 @@
 .control {
   background-image: url('../../assets/Control.png');
 }
+.hydroponics {
+  background-image: url('../../assets/Hydroponics-lab-room.png');
+}
 .mission {
   background-image: url('../../assets/Mission.png');
 }
@@ -26,7 +29,11 @@
 .buttonWraper {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 30px;
+  z-index: 30;
 }
 
 .button {
@@ -46,7 +53,6 @@
 }
 
 // Proctor
-
 .proctorContainer {
   display: flex;
   flex-direction: column;
@@ -84,16 +90,18 @@
 }
 
 .startButton {
-  background-color: transparent;
+  background-color: #4cd71c;
   color: white;
   border: none;
   font-size: 2rem;
   font-weight: bold;
   position: absolute;
-  bottom: 17%;
-  width: 300px;
+  bottom: 40%;
+  left: 30%;
+  width: 200px;
   height: 80px;
   cursor: pointer;
+  z-index: 30;
 }
 
 // Story display
@@ -101,12 +109,9 @@
   display: flex;
   flex-direction: column;
   width: 70%;
-  height: 20%;
   background-color: #367bebc5;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  bottom: 40px;
   padding: 24px;
   z-index: 20;
 }
@@ -120,119 +125,68 @@
 // Guide screen
 .guideContainer {
   display: flex;
-  justify-content: space-between;
-  width: 87%;
-  padding: 24px;
   position: absolute;
-  top: 0px;
+  background-image: url('../../assets/Screen-background.png');
+  background-size: cover;
+  top: 0;
+  left: 2%;
   z-index: 10;
+  width: 70vw;
+  height: 90vh;
 }
 
-.guideScreen {
-  width: 41vw;
-  height: 65vh;
-  background-color: #777777b0;
-}
-
-// Steering wheel
-.steerContainer {
-  position: absolute;
-  bottom: 0px;
-  z-index: 0;
-}
-
-.shapeWraper {
-  position: relative;
-}
-
-.oval {
-  width: 300px;
-  height: 70px;
-  background: #00a7fa;
-  border-radius: 100%;
-  position: absolute;
-  left: 35%;
-  top: 10px;
-  z-index: 10;
-}
-
-.ovalShadow {
-  width: 320px;
-  height: 70px;
-  background: #ffffff;
-  border-radius: 100%;
-  border: 1px solid black;
-  position: absolute;
-  left: 34%;
-  top: 20px;
-  z-index: 5;
-}
-
-.selectorWrapper {
+.guideContainerRed {
   display: flex;
-  justify-content: space-between;
   position: absolute;
+  background-image: url('../../assets/Screen-background.png');
+  background-size: cover;
+  top: 0;
+  left: 2%;
   z-index: 10;
-  bottom: 20%;
-  left: 15%;
-  width: 70%;
+  width: 70vw;
+  height: 90vh;
+  border: 4px solid red;
 }
 
-.triangleLeft {
-  width: 0;
-  height: 0;
-  border-top: 50px solid transparent;
-  border-right: 100px solid #00a7fa;
-  border-bottom: 50px solid transparent;
-}
-
-.triangleRight {
-  width: 0px;
-  height: 0px;
-  border-top: 50px solid transparent;
-  border-left: 100px solid #00a7fa;
-  border-bottom: 50px solid transparent;
-}
-
-.shadowWrapper {
-  display: flex;
-  justify-content: space-between;
+// Panel
+.panelContainer {
   position: absolute;
-  z-index: 5;
-  bottom: 20%;
-  left: 16%;
-  width: 68%;
+  right: 2%;
+  z-index: 10;
+  width: 24vw;
+  display: flex;
+  flex-direction: column;
 }
 
-.triangleLeftShadow {
-  width: 0;
-  height: 0;
-  border-top: 50px solid transparent;
-  border-right: 100px solid #acacac;
-  border-bottom: 50px solid transparent;
+.panel {
+  background-image: url('../../assets/Screen-background.png');
+  background-size: cover;
+  height: 35vh;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 6rem;
+  font-weight: bold;
 }
 
-.triangleRightShadow {
-  width: 0px;
-  height: 0px;
-  border-top: 50px solid transparent;
-  border-left: 100px solid #acacac;
-  border-bottom: 50px solid transparent;
+.ornament {
+  background-color: #205184;
+  height: 15vh;
+}
+
+.red {
+  border: 4px solid red;
 }
 
 // Explaination display
 .explainContainer {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  height: 20%;
-  background-color: #367bebc5;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  bottom: 40%;
-  padding: 24px;
+  bottom: 45%;
+  left: 9%;
   z-index: 20;
+  width: 60%;
 }
 
 .explainText {
@@ -241,32 +195,65 @@
   font-weight: bold;
 }
 
-.lineHelperLeft {
-  width: 3px;
-  height: 200px;
+.lineHelper {
+  width: 120px;
+  height: 4px;
   background: red;
   position: absolute;
   z-index: 20;
-  bottom: 15%;
-  left: 30%;
+  bottom: 51%;
+  right: 26%;
 }
 
-.lineHelperRight {
-  width: 3px;
-  height: 200px;
-  background: red;
-  position: absolute;
-  z-index: 20;
-  bottom: 15%;
-  right: 30%;
+.top {
+  top: 8%;
 }
 
-.lineHelperMid {
-  width: 3px;
-  height: 130px;
-  background: red;
+.middle {
+  top: 35%;
+  left: 15%;
+}
+
+// question box
+.questionContainer {
+  z-index: 30;
+  width: 70vw;
+  height: 80vh;
   position: absolute;
-  z-index: 20;
-  bottom: 25%;
-  left: 50%;
+  left: 0;
+  bottom: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.questionDomain {
+  width: 34.5vw;
+  height: 40vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.questionBox {
+  width: 22vw;
+  height: 13vh;
+  background-color: rgb(151, 81, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 30%;
+  left: 20%;
+  cursor: pointer;
+}
+
+.questionText {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.icon {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
 }
