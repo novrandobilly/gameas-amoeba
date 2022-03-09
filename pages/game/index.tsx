@@ -70,12 +70,17 @@ const Game: NextPage = () => {
         )}
         <Link href='/game/numerical-intro'>
           <button disabled={status !== 'authenticated'} className={styles['numerical-button']}>
-            Game I: Numerical Ability
+            Game I: Save The Plants!
           </button>
         </Link>
         <Link href='/game/problem-solving-test'>
           <button disabled={status !== 'authenticated'} className={styles['problem-solving-button']}>
             Game II: Problem Solving
+          </button>
+        </Link>
+        <Link href='/game/numerical-2-intro'>
+          <button disabled={status !== 'authenticated'} className={styles['numerical-2-button']}>
+            Game III: Quality Check
           </button>
         </Link>
         {status === 'authenticated' && (

@@ -21,6 +21,8 @@ const initialData = [
   { order: null, rotateValue: null },
   { order: null, rotateValue: null },
 ];
+
+let correctStyles = '';
 const Problem5: FC<ProblemSolvingType> = ({
   onDragStartHandler,
   onDragOverHandler,
@@ -30,6 +32,20 @@ const Problem5: FC<ProblemSolvingType> = ({
   setAnswerResult,
 }) => {
   const [chunkOrder, setChunkOrder] = useState<{ order: number | null; rotateValue: number | null }[]>(initialData);
+
+  useEffect(() => {
+    let counter = setInterval(() => {
+      setAnswerResult((prevState) => {
+        const newState = { ...prevState };
+        newState[5] = {
+          ...newState[5],
+          time: newState[5]?.time + 1,
+        };
+        return newState;
+      });
+    }, 1000);
+    return () => clearInterval(counter);
+  }, []);
 
   const onDragOverAnswer = (event: DragEvent<HTMLDivElement>) => {
     // Get container Id for determine index
@@ -151,11 +167,13 @@ const Problem5: FC<ProblemSolvingType> = ({
         newState[5] = {
           ...newState[5],
           isCorrect: true,
-          time: null,
         };
         return newState;
       });
-      setTestPhase(6);
+      let nextPhaseTimer = setTimeout(() => {
+        setTestPhase(6);
+      }, 1000);
+      return () => clearTimeout(nextPhaseTimer);
     }
   }, [chunkOrder]);
 
@@ -171,7 +189,7 @@ const Problem5: FC<ProblemSolvingType> = ({
     <Fragment>
       <div className={styles['problem-section']}>
         <div className={`${styles['puzzle-container']} ${styles['puzzle-problem']}`}></div>
-        <div className={styles['puzzle-container']}>
+        <div className={`${styles['puzzle-container']} ${correctStyles}`}>
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-1'></div>
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-2'></div>
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-3'></div>

@@ -4,7 +4,7 @@ import { MouseEvent as MouseEventClick } from 'react';
 export interface answerType {
   [answerNumber: string]: {
     isCorrect: boolean;
-    time: number | null;
+    time: number;
   };
 }
 

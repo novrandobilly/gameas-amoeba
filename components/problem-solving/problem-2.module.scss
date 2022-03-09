@@ -3,17 +3,17 @@
   max-width: 1000px;
   display: flex;
   justify-content: space-evenly;
-  margin: 0 auto 50px;
+  margin: 0 auto 1rem;
   .puzzle-container {
-    width: 300px;
-    height: 300px;
-    border: 1px solid black;
+    width: 360px;
+    height: 360px;
+    border: 1px solid #ffffff;
     display: flex;
     flex-wrap: wrap;
     box-sizing: content-box;
     .puzzle-box {
-      width: 150px;
-      height: 150px;
+      width: 180px;
+      height: 180px;
       box-sizing: border-box;
       border: 1px solid #ccc;
     }
@@ -29,15 +29,15 @@
   width: 100%;
   max-width: 1000px;
   height: 200px;
-  border: 1px solid #000;
+  border: 1px solid #ffffff;
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 .puzzle-item {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   cursor: move;
   transition: transform 0.2s ease-in-out;
 }

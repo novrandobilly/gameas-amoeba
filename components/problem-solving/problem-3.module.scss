@@ -3,11 +3,11 @@
   max-width: 1000px;
   display: flex;
   justify-content: space-evenly;
-  margin: 0 auto 25px;
+  margin: 0 auto 1rem;
   .puzzle-container {
     width: 360px;
     height: 360px;
-    border: 1px solid black;
+    border: 1px solid #fff;
     display: flex;
     flex-wrap: wrap;
     box-sizing: content-box;
@@ -27,9 +27,9 @@
 
 .answer-section {
   width: 100%;
-  max-width: 700px;
-  height: 280px;
-  border: 1px solid #000;
+  max-width: 1200px;
+  height: 200px;
+  border: 1px solid #fff;
   margin: auto;
   display: flex;
   align-items: center;

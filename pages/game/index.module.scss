@@ -45,8 +45,11 @@
     }
   }
   .numerical-button,
-  .problem-solving-button {
+  .problem-solving-button,
+  .numerical-2-button {
     background-color: #6ec84e;
+    min-width: 320px;
+    text-align: start;
     color: #fff;
     border: none;
     border-radius: 40px;

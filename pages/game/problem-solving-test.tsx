@@ -1,5 +1,8 @@
 import type { NextPage } from 'next';
-import { DragEvent, MouseEvent as MouseEventClick, useState } from 'react';
+import { Fragment } from 'react';
+import { useSession } from 'next-auth/react';
+import { DragEvent, MouseEvent as MouseEventClick, useEffect, useState } from 'react';
+import Link from 'next/link';
 import Problem1 from '../../components/problem-solving/problem-1';
 import Problem2 from '../../components/problem-solving/problem-2';
 import Problem3 from '../../components/problem-solving/problem-3';
@@ -13,29 +16,66 @@ import styles from './problem-solving-test.module.scss';
 const initialAnswer = {
   1: {
     isCorrect: false,
-    time: null,
+    time: 0,
   },
   2: {
     isCorrect: false,
-    time: null,
+    time: 0,
   },
   3: {
     isCorrect: false,
-    time: null,
+    time: 0,
   },
   4: {
     isCorrect: false,
-    time: null,
+    time: 0,
   },
   5: {
     isCorrect: false,
-    time: null,
+    time: 0,
   },
 };
 
 const ProblemSolving: NextPage = () => {
   const [testPhase, setTestPhase] = useState<number>(1);
   const [answerResult, setAnswerResult] = useState<answerType>(initialAnswer);
+  const [timer, setTimer] = useState<number>(60);
+  const { data: session, status } = useSession();
+
+  const onSubmitHandler = () => {
+    fetch('/api/game/problem-solving', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        answerResult,
+        userData: {
+          email: session?.user?.email,
+        },
+      }),
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((resJSON) => console.log(resJSON))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    let counter = setInterval(() => {
+      setTimer((timer) => {
+        if (timer === 0) {
+          clearInterval(counter);
+          return 60;
+        }
+        const updatedTimer = timer - 1;
+        return updatedTimer;
+      });
+    }, 1000);
+    return () => clearInterval(counter);
+  }, [timer]);
   const onDragStartHandler = (event: DragEvent<HTMLDivElement>) => {
     const item = event.target as HTMLElement;
     item.classList.add(styles['dragging']);
@@ -75,14 +115,26 @@ const ProblemSolving: NextPage = () => {
 
   const onBackHandler = () => {
     setTestPhase((prevState) => {
-      if (prevState > 1 && prevState < 7) return (prevState -= 1);
+      let newPhase = prevState - 1;
+      if (prevState > 1 && prevState < 7) {
+        while (newPhase > 0 && newPhase < 6 && answerResult[newPhase]?.isCorrect) {
+          newPhase -= 1;
+        }
+        if (newPhase > 0 && newPhase < 6) return newPhase;
+      }
       return prevState;
     });
   };
 
   const onPassHandler = () => {
     setTestPhase((prevState) => {
-      if (prevState > 0 && prevState < 6) return (prevState += 1);
+      let newPhase = prevState + 1;
+      if (prevState > 0 && prevState < 6) {
+        while (newPhase > 1 && newPhase < 7 && answerResult[newPhase]?.isCorrect) {
+          newPhase += 1;
+        }
+        if (newPhase > 1 && newPhase < 7) return newPhase;
+      }
       return prevState;
     });
   };
@@ -95,7 +147,13 @@ const ProblemSolving: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
+      <main className={styles['container']}>
+        {/* <p>{timer}</p>
+        <p style={{ margin: '0' }}>problem 1 timer: {answerResult[1].time}</p>
+        <p style={{ margin: '0' }}>problem 1 timer: {answerResult[2].time}</p>
+        <p style={{ margin: '0' }}>problem 1 timer: {answerResult[3].time}</p>
+        <p style={{ margin: '0' }}>problem 1 timer: {answerResult[4].time}</p>
+        <p style={{ margin: '0' }}>problem 1 timer: {answerResult[5].time}</p> */}
         <section className={styles['test-section']}>
           {testPhase === 1 && (
             <Problem1
@@ -146,6 +204,16 @@ const ProblemSolving: NextPage = () => {
               setTestPhase={setTestPhase}
               setAnswerResult={setAnswerResult}
             />
+          )}
+
+          {testPhase === 6 && (
+            <Fragment>
+              <h1>Selamat, Anda telah berhasil memperbaiki sistem kembali seperti semula</h1>
+              <Link href='/game'>
+                <span>Kembali ke deck pesawat</span>
+              </Link>
+              <button onClick={onSubmitHandler}>Submit</button>
+            </Fragment>
           )}
 
           <div className={styles['problem-navigation']}>

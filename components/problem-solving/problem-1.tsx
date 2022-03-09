@@ -9,6 +9,8 @@ const initialData = [
   { order: null, rotateValue: null },
   { order: null, rotateValue: null },
 ];
+
+let correctStyles = '';
 const Problem1: FC<ProblemSolvingType> = ({
   onDragStartHandler,
   onDragOverHandler,
@@ -18,6 +20,20 @@ const Problem1: FC<ProblemSolvingType> = ({
   setAnswerResult,
 }) => {
   const [chunkOrder, setChunkOrder] = useState<{ order: number | null; rotateValue: number | null }[]>(initialData);
+
+  useEffect(() => {
+    let counter = setInterval(() => {
+      setAnswerResult((prevState) => {
+        const newState = { ...prevState };
+        newState[1] = {
+          ...newState[1],
+          time: newState[1]?.time + 1,
+        };
+        return newState;
+      });
+    }, 1000);
+    return () => clearInterval(counter);
+  }, []);
 
   const onDragOverAnswer = (event: DragEvent<HTMLDivElement>) => {
     // Get container Id for determine index
@@ -134,16 +150,19 @@ const Problem1: FC<ProblemSolvingType> = ({
       });
     }
     if (answerIsCorrect) {
+      correctStyles = styles['correct'];
       setAnswerResult((prevState) => {
         const newState = { ...prevState };
         newState[1] = {
           ...newState[1],
           isCorrect: true,
-          time: null,
         };
         return newState;
       });
-      setTestPhase(2);
+      let nextPhaseTimer = setTimeout(() => {
+        setTestPhase(2);
+      }, 1000);
+      return () => clearTimeout(nextPhaseTimer);
     }
   }, [chunkOrder]);
 
@@ -158,8 +177,8 @@ const Problem1: FC<ProblemSolvingType> = ({
   return (
     <Fragment>
       <div className={styles['problem-section']}>
-        <div className={`${styles['puzzle-container']} ${styles['puzzle-problem']}`}></div>
-        <div className={styles['puzzle-container']}>
+        <div className={`${styles['puzzle-container']} ${styles['puzzle-problem']} `}></div>
+        <div className={`${styles['puzzle-container']} ${correctStyles}`}>
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-1'></div>
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-2'></div>
           <div className={styles['puzzle-box']} onDragOver={onDragOverAnswer} id='answer-box-3'></div>
