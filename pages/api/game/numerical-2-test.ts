@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { connectToDatabase } from '../../../lib/db';
 
-const ProblemSolvingHandler = async (req: Request, res: Response) => {
+const Numerical2TestHandler = async (req: Request, res: Response) => {
   if (req.method === 'POST') {
     const { answerResult, userData } = req.body;
     const client = await connectToDatabase();
@@ -10,10 +10,10 @@ const ProblemSolvingHandler = async (req: Request, res: Response) => {
     try {
       const users = await db.collection('users');
       const updateResult = await users.updateOne(
-        { email: userData?.email, problemSolving: { $exists: false } },
+        { email: userData?.email, numerical2: { $exists: false } },
         {
           $set: {
-            problemSolving: {
+            numerical2: {
               result: { ...answerResult },
               testDate: new Date(),
             },
@@ -38,4 +38,4 @@ const ProblemSolvingHandler = async (req: Request, res: Response) => {
   }
 };
 
-export default ProblemSolvingHandler;
+export default Numerical2TestHandler;

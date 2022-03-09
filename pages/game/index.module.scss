@@ -1,11 +1,15 @@
 .container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-image: url('../../assets/game-home-background.png');
   background-size: cover;
   background-repeat: no-repeat;
   box-sizing: border-box;
   position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 10rem;
   h1 {
     margin: 0;
   }
@@ -16,7 +20,6 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  position: absolute;
   top: 18vh;
   left: 10vw;
   width: 100%;

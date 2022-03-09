@@ -17,6 +17,7 @@ const Problem2: FC<ProblemSolvingType> = ({
   onClickHandler,
   setTestPhase,
   setAnswerResult,
+  onPassHandler,
 }) => {
   const [chunkOrder, setChunkOrder] = useState<{ order: number | null; rotateValue: number | null }[]>(initialData);
 
@@ -149,6 +150,7 @@ const Problem2: FC<ProblemSolvingType> = ({
       });
     }
     if (answerIsCorrect) {
+      correctStyles = styles['correct'];
       setAnswerResult((prevState) => {
         const newState = { ...prevState };
         newState[2] = {
@@ -158,7 +160,7 @@ const Problem2: FC<ProblemSolvingType> = ({
         return newState;
       });
       let nextPhaseTimer = setTimeout(() => {
-        setTestPhase(3);
+        onPassHandler();
       }, 1000);
       return () => clearTimeout(nextPhaseTimer);
     }

@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { DragEvent, MouseEvent as MouseEventClick, useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -39,7 +38,7 @@ const initialAnswer = {
 const ProblemSolving: NextPage = () => {
   const [testPhase, setTestPhase] = useState<number>(1);
   const [answerResult, setAnswerResult] = useState<answerType>(initialAnswer);
-  const [timer, setTimer] = useState<number>(60);
+  const [timer, setTimer] = useState<number>(10);
   const { data: session, status } = useSession();
 
   const onSubmitHandler = () => {
@@ -64,18 +63,39 @@ const ProblemSolving: NextPage = () => {
   };
 
   useEffect(() => {
-    let counter = setInterval(() => {
-      setTimer((timer) => {
+    if (testPhase !== 6) {
+      let counter = setInterval(() => {
         if (timer === 0) {
-          clearInterval(counter);
-          return 60;
+          onSubmitHandler();
+          setTestPhase(6);
         }
-        const updatedTimer = timer - 1;
-        return updatedTimer;
-      });
-    }, 1000);
-    return () => clearInterval(counter);
+        setTimer((prevState) => {
+          if (prevState === 0) {
+            clearInterval(counter);
+          }
+          const updatedTimer = prevState - 1;
+          return updatedTimer;
+        });
+      }, 1000);
+      return () => clearInterval(counter);
+    }
   }, [timer]);
+
+  useEffect(() => {
+    let testIsFinished = true;
+
+    for (const key in answerResult) {
+      testIsFinished = testIsFinished && answerResult[key].isCorrect;
+    }
+
+    if (testIsFinished) {
+      onSubmitHandler();
+      setTimeout(() => {
+        setTestPhase(6);
+      }, 1000);
+    }
+  }, [answerResult]);
+
   const onDragStartHandler = (event: DragEvent<HTMLDivElement>) => {
     const item = event.target as HTMLElement;
     item.classList.add(styles['dragging']);
@@ -129,11 +149,12 @@ const ProblemSolving: NextPage = () => {
   const onPassHandler = () => {
     setTestPhase((prevState) => {
       let newPhase = prevState + 1;
+      if (newPhase === 6) newPhase = 1;
       if (prevState > 0 && prevState < 6) {
-        while (newPhase > 1 && newPhase < 7 && answerResult[newPhase]?.isCorrect) {
+        while (newPhase > 0 && newPhase < 6 && answerResult[newPhase]?.isCorrect) {
           newPhase += 1;
         }
-        if (newPhase > 1 && newPhase < 7) return newPhase;
+        if (newPhase > 1 && newPhase < 6) return newPhase;
       }
       return prevState;
     });
@@ -163,6 +184,7 @@ const ProblemSolving: NextPage = () => {
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
               setAnswerResult={setAnswerResult}
+              onPassHandler={onPassHandler}
             />
           )}
           {testPhase === 2 && (
@@ -173,6 +195,7 @@ const ProblemSolving: NextPage = () => {
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
               setAnswerResult={setAnswerResult}
+              onPassHandler={onPassHandler}
             />
           )}
           {testPhase === 3 && (
@@ -183,6 +206,7 @@ const ProblemSolving: NextPage = () => {
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
               setAnswerResult={setAnswerResult}
+              onPassHandler={onPassHandler}
             />
           )}
           {testPhase === 4 && (
@@ -193,6 +217,7 @@ const ProblemSolving: NextPage = () => {
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
               setAnswerResult={setAnswerResult}
+              onPassHandler={onPassHandler}
             />
           )}
           {testPhase === 5 && (
@@ -203,21 +228,19 @@ const ProblemSolving: NextPage = () => {
               onClickHandler={onClickHandler}
               setTestPhase={setTestPhase}
               setAnswerResult={setAnswerResult}
+              onPassHandler={onPassHandler}
             />
           )}
 
           {testPhase === 6 && (
-            <Fragment>
+            <div className={styles['closing']}>
               <h1>Selamat, Anda telah berhasil memperbaiki sistem kembali seperti semula</h1>
-              <Link href='/game'>
-                <span>Kembali ke deck pesawat</span>
-              </Link>
-              <button onClick={onSubmitHandler}>Submit</button>
-            </Fragment>
+              <Link href='/game'>Kembali ke deck pesawat</Link>
+            </div>
           )}
 
           <div className={styles['problem-navigation']}>
-            {testPhase > 1 && (
+            {testPhase > 1 && testPhase < 6 && (
               <button className={styles['back-button']} onClick={onBackHandler}>
                 Back
               </button>

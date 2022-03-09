@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import { ChangeEvent, FormEvent, Fragment, MouseEvent, useEffect, useState } from 'react';
 import { useSession, getSession } from 'next-auth/react';
 import { signIn, signOut } from 'next-auth/react';
@@ -17,7 +17,6 @@ const Game: NextPage = () => {
     const codenameValue = event.target.value;
     setCodename(codenameValue);
   };
-
   const onLoginHandler = async (event: FormEvent) => {
     event.preventDefault();
     setLoginLoading(true);

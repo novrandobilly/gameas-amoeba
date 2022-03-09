@@ -11,7 +11,7 @@ import ThumbsDown from '../../assets/numerical-test-2/thumbs_down.png';
 import Equal from '../../assets/numerical-test-2/equal.png';
 
 const Numerical2Intro: NextPage = () => {
-  const [phase, setPhase] = useState<number>(11);
+  const [phase, setPhase] = useState<number>(1);
   const [upFeedback, setUpFeedback] = useState<string>('');
   const [equalFeedback, setEqualFeedback] = useState<string>('');
   const [downFeedback, setDownFeedback] = useState<string>('');

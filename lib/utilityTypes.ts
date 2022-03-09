@@ -15,4 +15,5 @@ export interface ProblemSolvingType {
   onClickHandler: (event: MouseEventClick) => { classList: string; rotateVal: number };
   setTestPhase: React.Dispatch<React.SetStateAction<number>>;
   setAnswerResult: React.Dispatch<React.SetStateAction<answerType>>;
+  onPassHandler: () => void;
 }

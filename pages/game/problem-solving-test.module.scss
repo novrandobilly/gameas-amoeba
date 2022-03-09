@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   padding: 1rem 0 1rem;
-  background-color: #19c5f0a1;
+  background-color: #008bfd7c;
 }
 
 .dragging {
@@ -54,4 +54,25 @@
 
 .pass-button {
   background-color: #6ec84e;
+}
+
+.closing {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+  }
+  a {
+    color: #fff;
+    font-weight: 700;
+    background-color: #6ec84e;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+  }
 }
