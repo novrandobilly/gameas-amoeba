@@ -39,8 +39,8 @@ const Numerical2Intro: NextPage = () => {
   return (
     <Fragment>
       <Head>
-        <title>Problem Solving Ability Test</title>
-        <meta name='description' content='Problem Solving Ability Test Page' />
+        <title>Quality Check</title>
+        <meta name='description' content='Quality Check Page' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles['container']}>
