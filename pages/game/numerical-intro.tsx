@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 import { useState, useEffect, FC } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -238,7 +239,7 @@ const NumericalIntro: FC<NumericProps> = (props) => {
     setCounter(counter + 1);
     setIconVisible(false);
     setUserAnswer('');
-    if (counter === 13 && renderItem < rightAnswer.length - 1) {
+    if (counter === 12 && renderItem < rightAnswer.length - 1) {
       setRenderItem(renderItem + 1);
     }
   };
@@ -247,19 +248,17 @@ const NumericalIntro: FC<NumericProps> = (props) => {
     setCounter(counter - 1);
     setIconVisible(false);
     setUserAnswer('');
-    if (counter === 14 && renderItem > 0) {
+    if (counter === 13 && renderItem > 0) {
       setRenderItem(renderItem - 1);
     }
   };
 
   const onAnswer: () => void = () => {
-    if (counter >= 13 && counter != 14) {
+    if (counter >= 12 && counter <= 13) {
       setIconVisible(true);
       setUserAnswer('answered');
     }
   };
-
-  console.log(counter);
 
   return (
     <div className={`${styles['container']} ${styles[`${renderBackground}`]}`}>
@@ -294,9 +293,9 @@ const NumericalIntro: FC<NumericProps> = (props) => {
                 className={styles['button']}
                 onClick={() => addCounter()}
                 disabled={
-                  counter >= 17 ||
-                  (counter === 13 && !userAnswer) ||
-                  (counter === 15 && !userAnswer)
+                  counter >= 15 ||
+                  (counter === 12 && !userAnswer) ||
+                  (counter === 13 && !userAnswer)
                 }
               >
                 {'>'}
@@ -335,22 +334,22 @@ const NumericalIntro: FC<NumericProps> = (props) => {
             </>
           )}
 
-          {counter === 14 && (
+          {counter === 13 && (
             <>
               <Explaination
-                text={story[counter - 4].text}
+                text={story[counter - 3].text}
                 position={renderPosition}
               />
             </>
           )}
 
-          {counter >= 16 && (
+          {counter >= 14 && (
             <>
-              <Explaination text={story[counter - 5].text} position='middle' />
+              <Explaination text={story[counter - 3].text} position='middle' />
             </>
           )}
 
-          {counter >= 11 && counter <= 15 && (
+          {counter >= 11 && counter <= 13 && (
             <div className={styles['questionContainer']}>
               <div className={styles['questionDomain']}>
                 <QuestionBox
@@ -391,10 +390,10 @@ const NumericalIntro: FC<NumericProps> = (props) => {
             </div>
           )}
 
-          {counter === 17 && (
-            <button className={styles['startButton']}>
-              <Link href='/game/numerical-test'>Mulai</Link>
-            </button>
+          {counter === 15 && (
+            <Link href='/game/numerical-test'>
+              <button className={styles['startButton']}>Mulai</button>
+            </Link>
           )}
         </div>
       </main>
