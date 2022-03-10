@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDatabase } from '../../../lib/db';
 
-const ProblemSolvingHandler = async (req: Request, res: Response) => {
+const ProblemSolvingHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { answerResult, userData } = req.body;
     const client = await connectToDatabase();

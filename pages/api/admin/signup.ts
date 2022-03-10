@@ -41,8 +41,8 @@ const AdminRegHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       throw new Error('Something went wrong');
     }
 
-    res.status(201).json({ message: 'Admin registered!' });
     client.close();
+    res.status(201).json({ message: 'Admin registered!' });
   }
 };
 

@@ -119,8 +119,6 @@ const Registration: NextPage = () => {
           throw new Error('Something went wrong');
         }
       });
-
-    console.log(payload);
   };
 
   const phase1 = (

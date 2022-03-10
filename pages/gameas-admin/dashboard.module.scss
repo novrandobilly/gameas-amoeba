@@ -1,0 +1,64 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background-image: url('../../assets/data-center.jpg');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-screen {
+  width: 100%;
+  max-width: 1400px;
+  background-color: #006600d8;
+  padding: 30px 10px;
+  margin: 0 0 30px;
+  h1 {
+    text-align: center;
+    margin: 0 0 10px;
+  }
+}
+
+.users-table {
+  width: 100%;
+  font-size: 0.9rem;
+  border-collapse: collapse;
+
+  th {
+    border-bottom: 1px solid #fff;
+    padding: 5px 0;
+  }
+
+  td {
+    padding: 5px 0;
+  }
+  .gender {
+    text-transform: capitalize;
+  }
+
+  .index,
+  .gender,
+  .age,
+  .domicile,
+  .job-description,
+  .regional,
+  .save-the-plants,
+  .hero-assemble,
+  .quality-check {
+    text-align: center;
+  }
+}
+
+.back-to-cockpit {
+  a {
+    background-color: #ed403c;
+    padding: 10px 20px;
+    font-weight: 700;
+    border-radius: 10px;
+  }
+}

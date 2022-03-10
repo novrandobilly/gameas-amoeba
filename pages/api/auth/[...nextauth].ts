@@ -11,12 +11,14 @@ export default NextAuth({
     jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id;
+        token.isAdmin = user.isAdmin;
       }
       return token;
     },
     session: async ({ session, token }) => {
       if (token) {
         session.userId = token.id;
+        session.isAdmin = token.isAdmin;
       }
       return session;
     },
@@ -27,7 +29,7 @@ export default NextAuth({
         const client = await connectToDatabase();
         const db = client.db();
         let foundId;
-        if (credentials?.admin) {
+        if (credentials?.admin === 'true') {
           foundId = await db.collection('admins').findOne({ email: credentials?.email });
         } else {
           foundId = await db.collection('users').findOne({ email: credentials?.email });
@@ -37,13 +39,13 @@ export default NextAuth({
           throw new Error('Authentication Failed');
         }
         client.close();
-        return { email: foundId.email, id: foundId._id.toString() };
+        return { email: foundId.email, id: foundId._id.toString(), isAdmin: foundId.isAdmin || false };
       },
 
       // Add list of property you want to include here
       credentials: {
         email: { label: 'email', type: 'text' },
-        admin: { label: 'admin', type: 'boolean' },
+        admin: { label: 'admin' },
       },
     }),
   ],
