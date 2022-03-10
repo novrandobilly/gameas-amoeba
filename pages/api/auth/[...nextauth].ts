@@ -26,17 +26,24 @@ export default NextAuth({
       async authorize(credentials) {
         const client = await connectToDatabase();
         const db = client.db();
-        const foundUser = await db.collection('users').findOne({ email: credentials?.email });
-        if (!foundUser) {
+        let foundId;
+        if (credentials?.admin) {
+          foundId = await db.collection('admins').findOne({ email: credentials?.email });
+        } else {
+          foundId = await db.collection('users').findOne({ email: credentials?.email });
+        }
+        if (!foundId) {
           client.close();
           throw new Error('Authentication Failed');
         }
         client.close();
-        return { email: foundUser.email, id: foundUser._id.toString() };
+        return { email: foundId.email, id: foundId._id.toString() };
       },
 
+      // Add list of property you want to include here
       credentials: {
         email: { label: 'email', type: 'text' },
+        admin: { label: 'admin', type: 'boolean' },
       },
     }),
   ],

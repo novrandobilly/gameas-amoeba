@@ -1,6 +1,6 @@
-import type { NextPage, GetServerSideProps } from 'next';
-import { ChangeEvent, FormEvent, Fragment, MouseEvent, useEffect, useState } from 'react';
-import { useSession, getSession } from 'next-auth/react';
+import type { NextPage } from 'next';
+import { ChangeEvent, FormEvent, Fragment, MouseEvent, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { signIn, signOut } from 'next-auth/react';
 import Head from 'next/head';
 import styles from './index.module.scss';
@@ -20,7 +20,7 @@ const Game: NextPage = () => {
   const onLoginHandler = async (event: FormEvent) => {
     event.preventDefault();
     setLoginLoading(true);
-    const result = await signIn('credentials', { redirect: false, email: codename });
+    const result = await signIn('credentials', { redirect: false, email: codename, admin: false });
     setCodename('');
     console.log(result);
     setLoginLoading(false);
