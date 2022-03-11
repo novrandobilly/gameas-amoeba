@@ -119,20 +119,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //   };
   // }
 
-  let foundUsers;
   try {
-    foundUsers = await fetch(`${process.env.BASE_URL}/api/admin/users`, {
+    let foundUsers = await fetch(`${process.env.BASE_URL}/api/admin/users`, {
       method: 'GET',
     });
     foundUsers = await foundUsers.json();
+    return {
+      props: {
+        session,
+        foundUsers,
+      },
+    };
   } catch (err) {
     console.log(err);
   }
-
   return {
     props: {
       session,
-      foundUsers,
+      foundUsers: [],
     },
   };
 };
