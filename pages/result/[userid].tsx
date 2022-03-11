@@ -1,5 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSession } from 'next-auth/react';
+import { connectToDatabase } from '../../lib/db';
+import { ObjectId } from 'mongodb';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from './userid.module.scss';
@@ -140,20 +142,27 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
     };
   }
 
-  let foundUser: {
-    [key: string]: any;
-  } = {};
-  let cookie: any = req.headers.cookie;
-  try {
-    foundUser = await fetch(`${process.env.BASE_URL}/api/game/${params?.userid}`, {
-      method: 'GET',
-      headers: {
-        cookie,
-      },
-    });
-    foundUser = await foundUser.json();
-  } catch (err) {}
+  let foundUser;
 
+  const client = await connectToDatabase();
+  const db = client.db();
+
+  let objectId;
+  if (typeof params?.userid === 'string') {
+    objectId = new ObjectId(params?.userid);
+  }
+
+  try {
+    foundUser = await db.collection('users').findOne({ _id: objectId });
+  } catch (err) {
+    client.close();
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
+    throw new Error('Something went wrong');
+  }
+
+  client.close();
   return {
     props: { session, foundUser },
   };
