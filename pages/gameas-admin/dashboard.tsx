@@ -1,6 +1,7 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import { DateTime } from 'luxon';
+import { connectToDatabase } from '../../lib/db';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from './dashboard.module.scss';
@@ -119,24 +120,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //   };
   // }
 
+  const client = await connectToDatabase();
+  const db = client.db();
+
+  let foundUsers;
   try {
-    let foundUsers = await fetch(`${process.env.BASE_URL}/api/admin/users`, {
-      method: 'GET',
-    });
-    foundUsers = await foundUsers.json();
-    return {
-      props: {
-        session,
-        foundUsers,
-      },
-    };
+    foundUsers = await db.collection('users').find({}).toArray();
   } catch (err) {
+    client.close();
     console.log(err);
   }
+  client.close();
   return {
     props: {
       session,
-      foundUsers: [],
+      foundUsers,
     },
   };
 };
