@@ -38,15 +38,15 @@ const Game: NextPage = () => {
       </Head>
 
       <div className={styles['menu']}>
-        <Link href='/'>
+        <Link passHref href='/'>
           <div className={styles['logo']}>
-            <Image src={Logo} width={300} height={150} />
+            <Image alt='Logo' src={Logo} width={300} height={150} />
           </div>
         </Link>
 
         {status !== 'authenticated' && (
           <Fragment>
-            <Link href='/game/registration'>
+            <Link passHref href='/game/registration'>
               <button className={styles['register-button']}>Daftar</button>
             </Link>
             <form className={styles['login-form']} onSubmit={onLoginHandler}>
@@ -66,27 +66,27 @@ const Game: NextPage = () => {
             </form>
           </Fragment>
         )}
-        <Link href='/game/numerical-intro'>
+        <Link passHref href='/game/numerical-intro'>
           <button disabled={status !== 'authenticated'} className={styles['numerical-button']}>
             Game I: Save The Plants!
           </button>
         </Link>
-        <Link href='/game/problem-solving-test'>
+        <Link passHref href='/game/problem-solving-test'>
           <button disabled={status !== 'authenticated'} className={styles['problem-solving-button']}>
             Game II: Problem Solving
           </button>
         </Link>
-        <Link href='/game/numerical-2-intro'>
+        <Link passHref href='/game/numerical-2-intro'>
           <button disabled={status !== 'authenticated'} className={styles['numerical-2-button']}>
             Game III: Quality Check
           </button>
         </Link>
         {status === 'authenticated' && (
-          <Link href={`/result/${session?.userId}`}>
+          <Link passHref href={`/result/${session?.userId}`}>
             <button className={styles['result-button']}>Hasil Test</button>
           </Link>
         )}
-        <Link href='/help'>
+        <Link passHref href='/help'>
           <button className={styles['help-button']}>Bantuan</button>
         </Link>
         {status === 'authenticated' && (

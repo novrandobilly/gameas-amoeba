@@ -110,7 +110,7 @@ const Numerical2Intro: NextPage = () => {
                 {phase <= 4 && <p>Pada kolom ini akan ditampilkan alat yang akan kita periksa</p>}
                 {phase >= 5 && (
                   <Fragment>
-                    <Image src={phase >= 12 ? LandingModule : Explorer} width={300} height={200} />
+                    <Image alt='Image Example' src={phase >= 12 ? LandingModule : Explorer} width={300} height={200} />
                     <p>{phase >= 12 ? 'Landing Module' : 'Explorer'}</p>
                   </Fragment>
                 )}
@@ -159,13 +159,13 @@ const Numerical2Intro: NextPage = () => {
                   {phase < 13 && (
                     <Fragment>
                       <div className={`${styles['option-button']} ${upFeedback}`} onClick={onClickUpHandler}>
-                        <Image src={ThumbsUp} width={150} height={100} />
+                        <Image alt='Thumbs Up' src={ThumbsUp} width={150} height={100} />
                       </div>
                       <div className={`${styles['option-button']} ${equalFeedback}`} onClick={onClickEqualHandler}>
-                        <Image src={Equal} width={150} height={100} />
+                        <Image alt='Equal' src={Equal} width={150} height={100} />
                       </div>
                       <div className={`${styles['option-button']} ${downFeedback}`} onClick={onClickDownHandler}>
-                        <Image src={ThumbsDown} width={150} height={100} />
+                        <Image alt='Thumbs Down' src={ThumbsDown} width={150} height={100} />
                       </div>
                     </Fragment>
                   )}
@@ -174,7 +174,7 @@ const Numerical2Intro: NextPage = () => {
                       <div className={styles['repeat']} onClick={() => setPhase(1)}>
                         Ulangi Instruksi
                       </div>
-                      <Link href='/game/numerical-2-test'>
+                      <Link passHref href='/game/numerical-2-test'>
                         <div className={styles['start']}>Mulai</div>
                       </Link>
                     </Fragment>

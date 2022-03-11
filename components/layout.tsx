@@ -9,9 +9,9 @@ const Layout: FC = ({ children }) => {
   return (
     <div className={styles['container']}>
       <div className={styles['navigation-bar']}>
-        <Link href='/'>
+        <Link passHref href='/'>
           <div className={styles['logo']}>
-            <Image width={100} height={50} src={Logo} />
+            <Image alt='Logo' width={100} height={50} src={Logo} />
           </div>
         </Link>
         <div className={styles['navigation-items']}>

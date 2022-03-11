@@ -151,11 +151,11 @@ const Registration: NextPage = () => {
       <h1>Pilih Gender Karakter Anda!</h1>
       <div className={styles['gender-option']}>
         <div className={`${styles['gender']} ${styles['male']}`} onClick={onGenderHandler.bind(null, true)}>
-          <Image src={Male} width={300} height={300} />
+          <Image alt='Male' src={Male} width={300} height={300} />
           <h1>Pria</h1>
         </div>
         <div className={`${styles['gender']} ${styles['female']}`} onClick={onGenderHandler.bind(null, false)}>
-          <Image src={Female} width={300} height={300} />
+          <Image alt='Female' src={Female} width={300} height={300} />
           <h1>Wanita</h1>
         </div>
       </div>

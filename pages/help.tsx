@@ -16,7 +16,7 @@ const Help: NextPage = () => {
       </Head>
 
       <main className={styles['help-content']}>
-        <Image src={Logo} width={400} height={200} />
+        <Image alt='Logo' src={Logo} width={400} height={200} />
         <h1>FAQ & Kontak</h1>
         <Link href='/game'>Kembali</Link>
       </main>

@@ -339,20 +339,20 @@ const Numerical2Test = () => {
               </div>
               <div className={styles['tools']}>
                 <Fragment>
-                  <Image src={toolsImage} width={300} height={200} />
+                  <Image alt='Tools Image' src={toolsImage} width={300} height={200} />
                   <p>{toolsText}</p>
                 </Fragment>
               </div>
             </div>
             <div className={styles['answer-options']}>
               <div className={`${styles['option-button']} ${feedback.upFeedback}`} onClick={onUpClickHandler}>
-                <Image src={ThumbsUp} width={150} height={100} />
+                <Image alt='Thumbs Up' src={ThumbsUp} width={150} height={100} />
               </div>
               <div className={`${styles['option-button']} ${feedback.equalFeedback}`} onClick={onEqualClickHandler}>
-                <Image src={Equal} width={150} height={100} />
+                <Image alt='Equal ' src={Equal} width={150} height={100} />
               </div>
               <div className={`${styles['option-button']} ${feedback.downFeedback}`} onClick={onDownClickHandler}>
-                <Image src={ThumbsDown} width={150} height={100} />
+                <Image alt='Thumbs Down' src={ThumbsDown} width={150} height={100} />
               </div>
             </div>
           </Fragment>
