@@ -110,14 +110,14 @@ export default Dashboard;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
 
-  if (!session || !session?.isAdmin) {
-    return {
-      redirect: {
-        destination: '/game',
-        permanent: false,
-      },
-    };
-  }
+  // if (!session || !session?.isAdmin) {
+  //   return {
+  //     redirect: {
+  //       destination: '/game',
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   let foundUsers;
   try {
