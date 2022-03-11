@@ -1,7 +1,9 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, Fragment, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Head from 'next/head';
+import Link from 'next/link';
 import { NumericalData } from '../../lib/numerical-data';
 import { useStopwatch } from 'react-timer-hook';
 
@@ -61,14 +63,15 @@ const QuestionBox: FC<QuestionBoxProps> = (props) => {
 
 const NumericalTest: NextPage = () => {
   const { question, result, rightAnswer } = NumericalData();
-
+  const { data: session, status } = useSession();
   const [iconVisible, setIconVisible] = useState<boolean>(false);
   const [renderItem, setRenderItem] = useState<number>(0);
   const [item, setItem] = useState<number>(0);
-  const [userAnswer] = useState<
+  const [userAnswer, setUserAnswer] = useState<
     {
       answer: string;
       time: number;
+      isCorrect: boolean;
     }[]
   >([]);
 
@@ -94,14 +97,75 @@ const NumericalTest: NextPage = () => {
     }
   }, [currentCount]);
 
+  useEffect(() => {
+    if (userAnswer.length === rightAnswer.length) {
+      let answerResult: {
+        [key: string]: any;
+      } = {};
+      userAnswer.forEach((answer, index) => {
+        answerResult[`ans${index + 1}`] = {
+          answer: answer.answer,
+          isCorrect: answer.isCorrect,
+          time: answer.time,
+        };
+      });
+
+      const userData = { email: session?.user?.email };
+      if (renderItem !== 5) {
+        fetch('/api/game/numerical-test', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            answerResult,
+            userData,
+          }),
+        })
+          .then((res) => res.json())
+          .then((resJSON) => console.log(resJSON))
+          .catch((err) => console.log(err));
+      }
+    }
+  }, [userAnswer]);
+
   const onAnswer: (value: string) => void = (value) => {
     if (renderItem <= rightAnswer.length - 1) {
       setItem(item + 1);
+      let isCorrect = false;
+      if (rightAnswer[renderItem] === value) {
+        isCorrect = true;
+      }
+
+      let answer = '';
+      switch (value) {
+        case 'topLeft':
+          answer = question.topLeft[renderItem].ask;
+          break;
+        case 'topRight':
+          answer = question.topRight[renderItem].ask;
+          break;
+        case 'bottomLeft':
+          answer = question.bottomLeft[renderItem].ask;
+          break;
+        case 'bottomRight':
+          answer = question.bottomRight[renderItem].ask;
+          break;
+        default:
+          answer = '';
+      }
+
       const dataToSave = {
-        answer: `soal ${renderItem + 1}`,
+        answer,
         time: seconds,
+        isCorrect,
       };
-      userAnswer.push(dataToSave);
+      setUserAnswer((prevState) => {
+        const newState = [...prevState];
+        newState.push(dataToSave);
+        return newState;
+      });
+      // userAnswer.push(dataToSave);
     }
     setIconVisible(true);
     setCount(0);
@@ -110,8 +174,8 @@ const NumericalTest: NextPage = () => {
   return (
     <div className={styles['container']}>
       <Head>
-        <title>Numerical Intro Ability Test</title>
-        <meta name='description' content='Numerical Ability Test Page' />
+        <title>Save The Plants</title>
+        <meta name='description' content='Save The Plants Test Page' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -120,10 +184,11 @@ const NumericalTest: NextPage = () => {
           <div className={styles['guideWraper']}>
             <div className={styles['guideContainer']}>
               {renderItem > rightAnswer.length - 1 && (
-                <p className={styles['textDone']}>
-                  Selamat kamu telah berhasil mengatur suhu tiap display
-                  tanaman!!
-                </p>
+                <div className={styles['complete-text']}>
+                  <p className={styles['textDone']}>Selamat kamu telah berhasil mengatur suhu tiap display tanaman!</p>
+
+                  <Link href='/game'>Kembali ke Deck</Link>
+                </div>
               )}
             </div>
             <Panel result={result[renderItem]} />

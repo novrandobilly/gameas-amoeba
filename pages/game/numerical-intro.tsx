@@ -44,17 +44,9 @@ const Proctor: FC<IntroProps> = (props) => {
   const { proctorImage, addCounter } = props;
   return (
     <div className={styles['proctorContainer']}>
-      <Image
-        src={proctorImage}
-        alt='proctor'
-        width={650}
-        height={420}
-        layout='fixed'
-      />
+      <Image src={proctorImage} alt='proctor' width={650} height={420} layout='fixed' />
 
-      <p className={styles['proctorText']}>
-        Scan wajah untuk mengakses ruang kendali
-      </p>
+      <p className={styles['proctorText']}>Scan wajah untuk mengakses ruang kendali</p>
       <button className={styles['submit']} onClick={() => addCounter()}>
         Submit
       </button>
@@ -76,9 +68,7 @@ const Panel: FC<PanelProps> = (props) => {
   return (
     <div className={styles['panelContainer']}>
       <div className={styles['ornament']} />
-      <div className={`${styles['panel']} ${styles[border]}`}>
-        {counter <= 15 && value}
-      </div>
+      <div className={`${styles['panel']} ${styles[border]}`}>{counter <= 15 && value}</div>
       <div className={styles['ornament']} />
     </div>
   );
@@ -135,7 +125,7 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   });
   const [result] = useState<number[]>([70, 80]);
   const [rightAnswer] = useState<string[]>(['topRight', 'bottomLeft']);
-
+  console.log(userAnswer);
   const [story] = useState([
     { id: 1, text: `hi ${nama}, selamat datang di ruang kendali!` },
     {
@@ -263,41 +253,27 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   return (
     <div className={`${styles['container']} ${styles[`${renderBackground}`]}`}>
       <Head>
-        <title>Numerical Ability Intro</title>
-        <meta name='description' content='Numerical Ability Intro Page' />
+        <title>Save The Plants</title>
+        <meta name='description' content='Save The Plants Page' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main>
         <div className={styles['missionContainer']}>
           {visible ? (
-            <Proctor
-              proctorImage={ProctorImage}
-              addCounter={() => addCounter()}
-            />
+            <Proctor proctorImage={ProctorImage} addCounter={() => addCounter()} />
           ) : (
             <div className={styles['buttonWraper']}>
-              <button
-                className={styles['button']}
-                onClick={() => substractCounter()}
-                disabled={counter <= 0}
-              >
+              <button className={styles['button']} onClick={() => substractCounter()} disabled={counter <= 0}>
                 {'<'}
               </button>
 
-              {counter >= 3 && counter <= 9 && (
-                <Story text={story[counter - 3].text} />
-              )}
+              {counter >= 3 && counter <= 9 && <Story text={story[counter - 3].text} />}
 
               <button
                 className={styles['button']}
                 onClick={() => addCounter()}
-                disabled={
-                  counter >= 15 ||
-                  (counter === 12 && !userAnswer) ||
-                  (counter === 13 && !userAnswer)
-                }
-              >
+                disabled={counter >= 15 || (counter === 12 && !userAnswer) || (counter === 13 && !userAnswer)}>
                 {'>'}
               </button>
             </div>
@@ -305,41 +281,21 @@ const NumericalIntro: FC<NumericProps> = (props) => {
 
           {counter >= 10 && (
             <>
-              <div
-                className={
-                  counter === 11
-                    ? styles['guideContainerRed']
-                    : styles['guideContainer']
-                }
-              />{' '}
-              <Panel
-                border={renderBorder}
-                value={result[renderItem]}
-                counter={counter}
-              />{' '}
+              <div className={counter === 11 ? styles['guideContainerRed'] : styles['guideContainer']} />{' '}
+              <Panel border={renderBorder} value={result[renderItem]} counter={counter} />{' '}
             </>
           )}
 
           {counter >= 10 && counter <= 12 && (
             <>
-              <Explaination
-                text={story[counter - 3].text}
-                position={renderPosition}
-              />
-              <div
-                className={
-                  counter === 10 ? styles['lineHelper'] : styles['dummy']
-                }
-              />
+              <Explaination text={story[counter - 3].text} position={renderPosition} />
+              <div className={counter === 10 ? styles['lineHelper'] : styles['dummy']} />
             </>
           )}
 
           {counter === 13 && (
             <>
-              <Explaination
-                text={story[counter - 3].text}
-                position={renderPosition}
-              />
+              <Explaination text={story[counter - 3].text} position={renderPosition} />
             </>
           )}
 

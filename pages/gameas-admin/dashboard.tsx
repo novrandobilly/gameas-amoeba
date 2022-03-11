@@ -121,7 +121,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   let foundUsers;
   try {
-    foundUsers = await fetch('http://localhost:3000/api/admin/users', {
+    foundUsers = await fetch(`${process.env.BASE_URL}/api/admin/users`, {
       method: 'GET',
     });
     foundUsers = await foundUsers.json();

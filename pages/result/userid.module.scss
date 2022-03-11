@@ -1,0 +1,90 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background-image: url('../../assets/crew-bedroom.jpg');
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > a {
+    color: #fff;
+    background-color: #ed403c;
+    padding: 10px 20px;
+    font-weight: 700;
+    border-radius: 10px;
+  }
+}
+
+.data-screen {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #006600d8;
+  margin: 0 auto 20px;
+  color: #fff;
+  h1 {
+    text-align: center;
+  }
+  padding: 20px;
+}
+
+.data-content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.biodata {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  .gender {
+    text-transform: capitalize;
+  }
+  p {
+    margin: 5px 0;
+    display: flex;
+    width: 100%;
+    //  font-size: 1.5rem;
+  }
+  span {
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+.test-result {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  h3 {
+    margin: 0 0 5px;
+  }
+  .numerical-result,
+  .problem-solving,
+  .numerical2-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 0 20px;
+  }
+  table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+  }
+
+  th,
+  td {
+    text-align: center;
+    border: 1px solid #fff;
+  }
+}
