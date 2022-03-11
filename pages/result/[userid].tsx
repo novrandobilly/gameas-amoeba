@@ -134,14 +134,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
   const session = await getSession({ req });
   const { userid } = query;
 
-  if (!session || session.userId !== userid) {
-    return {
-      redirect: {
-        destination: '/game',
-        permanent: false,
-      },
-    };
-  }
+  // if (!session || session.userId !== userid) {
+  //   return {
+  //     redirect: {
+  //       destination: '/game',
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   const client = await connectToDatabase();
   const db = client.db();
