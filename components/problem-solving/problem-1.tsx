@@ -34,7 +34,7 @@ const Problem1: FC<ProblemSolvingType> = ({
       });
     }, 1000);
     return () => clearInterval(counter);
-  }, []);
+  }, []); // eslint-disable-line
 
   const onDragOverAnswer = (event: DragEvent<HTMLDivElement>) => {
     // Get container Id for determine index
@@ -165,7 +165,7 @@ const Problem1: FC<ProblemSolvingType> = ({
       }, 1000);
       return () => clearTimeout(nextPhaseTimer);
     }
-  }, [chunkOrder]);
+  }, [chunkOrder]); // eslint-disable-line
 
   // Remove border when node is filled
   useEffect(() => {

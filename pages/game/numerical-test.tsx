@@ -95,7 +95,7 @@ const NumericalTest: NextPage = () => {
     if (currentCount < 0) {
       reset();
     }
-  }, [currentCount]);
+  }, [currentCount]); // eslint-disable-line
 
   useEffect(() => {
     if (userAnswer.length === rightAnswer.length) {
@@ -127,7 +127,7 @@ const NumericalTest: NextPage = () => {
           .catch((err) => console.log(err));
       }
     }
-  }, [userAnswer]);
+  }, [userAnswer]); // eslint-disable-line
 
   const onAnswer: (value: string) => void = (value) => {
     if (renderItem <= rightAnswer.length - 1) {

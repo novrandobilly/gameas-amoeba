@@ -107,7 +107,7 @@ const Numerical2Test = () => {
         .then((resJSON) => console.log(resJSON))
         .catch((err) => console.log(err));
     }
-  }, [testPhase]);
+  }, [testPhase]); // eslint-disable-line
 
   const onUpClickHandler = () => {
     switch (testPhase) {

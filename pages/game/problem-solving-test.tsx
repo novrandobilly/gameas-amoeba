@@ -79,7 +79,7 @@ const ProblemSolving: NextPage = () => {
       }, 1000);
       return () => clearInterval(counter);
     }
-  }, [timer]);
+  }, [timer]); // eslint-disable-line
 
   useEffect(() => {
     let testIsFinished = true;
@@ -94,7 +94,7 @@ const ProblemSolving: NextPage = () => {
         setTestPhase(6);
       }, 1000);
     }
-  }, [answerResult]);
+  }, [answerResult]); // eslint-disable-line
 
   const onDragStartHandler = (event: DragEvent<HTMLDivElement>) => {
     const item = event.target as HTMLElement;
