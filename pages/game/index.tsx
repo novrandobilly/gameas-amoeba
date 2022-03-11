@@ -12,7 +12,7 @@ const Game: NextPage = () => {
   const { data: session, status } = useSession();
   const [loginLoading, setLoginLoading] = useState<boolean>(false);
   const [codename, setCodename] = useState<string>('');
-
+  console.log('client', session);
   const onCodenameHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const codenameValue = event.target.value;
     setCodename(codenameValue);
