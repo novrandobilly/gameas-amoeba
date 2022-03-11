@@ -17,11 +17,11 @@ interface UserIdType {
 const UserResult: NextPage<UserIdType> = ({ session, foundUser }) => {
   const { name, email, gender, dateOfBirth, domicile, jobDesc, regional, numerical, problemSolving, numerical2 } =
     foundUser;
-  console.log(foundUser);
   const saveThePlants = numerical ? Object.values(numerical.result) : [];
   const heroAssemble = problemSolving ? Object.values(problemSolving.result) : [];
   const qualityCheck = numerical2 ? Object.values(numerical2.result) : [];
 
+  console.log(session);
   return (
     <div className={styles['container']}>
       <Head>
@@ -155,7 +155,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
     let foundUser: any = await db.collection('users').findOne({ _id: objectId?.toString });
     foundUser = JSON.stringify(foundUser);
     foundUser = JSON.parse(foundUser);
-    console.log(foundUser);
     return {
       props: { session, foundUser },
     };
