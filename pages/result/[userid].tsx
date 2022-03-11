@@ -1,10 +1,10 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSession } from 'next-auth/react';
 import { connectToDatabase } from '../../lib/db';
-import { ObjectId } from 'mongodb';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from './userid.module.scss';
+import { ObjectId } from 'mongodb';
 
 interface UserIdType {
   session: {
@@ -130,10 +130,11 @@ const UserResult: NextPage<UserIdType> = ({ session, foundUser }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
   const session = await getSession({ req });
+  const { userid } = query;
 
-  if (!session || session.userId !== params?.userid) {
+  if (!session || session.userId !== userid) {
     return {
       redirect: {
         destination: '/game',
@@ -142,30 +143,25 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
     };
   }
 
-  let foundUser;
-
   const client = await connectToDatabase();
   const db = client.db();
 
   let objectId;
-  if (typeof params?.userid === 'string') {
-    objectId = new ObjectId(params?.userid);
+  if (typeof userid === 'string') {
+    objectId = new ObjectId(userid);
   }
 
   try {
-    foundUser = await db.collection('users').findOne({ _id: objectId });
+    let foundUser: any = await db.collection('users').findOne({ _id: objectId?.toString });
+    foundUser = JSON.stringify(foundUser);
+    foundUser = JSON.parse(foundUser);
+    console.log(foundUser);
+    return {
+      props: { session, foundUser },
+    };
   } catch (err) {
-    client.close();
-    if (err instanceof Error) {
-      throw new Error(err.message);
-    }
-    throw new Error('Something went wrong');
+    return { props: {} };
   }
-
-  client.close();
-  return {
-    props: { session, foundUser },
-  };
 };
 
 export default UserResult;

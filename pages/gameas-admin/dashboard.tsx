@@ -16,6 +16,7 @@ interface DashboardPropsType {
 }
 
 const Dashboard: NextPage<DashboardPropsType> = ({ foundUsers, session }) => {
+  console.log(session);
   return (
     <div className={styles['container']}>
       <Head>
