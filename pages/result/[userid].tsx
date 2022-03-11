@@ -131,12 +131,6 @@ const UserResult: NextPage<UserIdType> = ({ session, foundUser }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
-  let session: any;
-  try {
-    session = await getSession({ req });
-  } catch (err) {
-    session = err;
-  }
   const { userid } = query;
 
   // if (!session || session.userId !== userid) {
@@ -161,7 +155,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
     foundUser = JSON.stringify(foundUser);
     foundUser = JSON.parse(foundUser);
     return {
-      props: { session, foundUser },
+      props: { foundUser },
     };
   } catch (err) {
     return { props: {} };
