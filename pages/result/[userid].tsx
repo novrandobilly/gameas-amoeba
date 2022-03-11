@@ -21,7 +21,6 @@ const UserResult: NextPage<UserIdType> = ({ session, foundUser }) => {
   const heroAssemble = problemSolving ? Object.values(problemSolving.result) : [];
   const qualityCheck = numerical2 ? Object.values(numerical2.result) : [];
 
-  console.log(session);
   return (
     <div className={styles['container']}>
       <Head>
@@ -133,7 +132,6 @@ const UserResult: NextPage<UserIdType> = ({ session, foundUser }) => {
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
   const { userid } = query;
   const session = await getSession({ req });
-
   if (!session || session.userId !== userid) {
     return {
       redirect: {
@@ -152,7 +150,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
   }
 
   try {
-    let foundUser: any = await db.collection('users').findOne({ _id: objectId?.toString });
+    let foundUser: any = await db.collection('users').findOne({ email: session.user?.email });
+
     foundUser = JSON.stringify(foundUser);
     foundUser = JSON.parse(foundUser);
     return {

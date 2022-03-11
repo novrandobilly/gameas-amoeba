@@ -16,6 +16,7 @@ const Game: NextPage = () => {
     const codenameValue = event.target.value;
     setCodename(codenameValue);
   };
+  console.log(session);
   const onLoginHandler = async (event: FormEvent) => {
     event.preventDefault();
     setLoginLoading(true);

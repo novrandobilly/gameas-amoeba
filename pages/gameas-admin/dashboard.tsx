@@ -16,7 +16,6 @@ interface DashboardPropsType {
 }
 
 const Dashboard: NextPage<DashboardPropsType> = ({ foundUsers, session }) => {
-  console.log(session);
   return (
     <div className={styles['container']}>
       <Head>
@@ -127,6 +126,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let foundUsers;
   try {
     foundUsers = await db.collection('users').find({}).toArray();
+    foundUsers = JSON.stringify(foundUsers);
+    foundUsers = JSON.parse(foundUsers);
   } catch (err) {
     client.close();
     console.log(err);
