@@ -133,16 +133,15 @@ const UserResult: NextPage<UserIdType> = ({ session, foundUser }) => {
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
   const { userid } = query;
   const session = await getSession({ req });
-  console.log(session);
 
-  // if (!session || session.userId !== userid) {
-  //   return {
-  //     redirect: {
-  //       destination: '/game',
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (!session || session.userId !== userid) {
+    return {
+      redirect: {
+        destination: '/game',
+        permanent: false,
+      },
+    };
+  }
 
   const client = await connectToDatabase();
   const db = client.db();
