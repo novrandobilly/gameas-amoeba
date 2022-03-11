@@ -112,8 +112,8 @@ const GameAsAdmin: NextPage = () => {
               <h2>Existing General? Simply state your identification here</h2>
               <form onSubmit={onSignInHandler} className={styles['signin-form']}>
                 <div className={styles['input-container']}>
-                  <label htmlFor='admin-email'>Email</label>
-                  <input type='text' id='admin-email' ref={emailSignInRef} />
+                  <label htmlFor='admin-email-signin'>Email</label>
+                  <input type='text' id='admin-email-signin' ref={emailSignInRef} />
                 </div>
                 <button>Sign In</button>
               </form>
