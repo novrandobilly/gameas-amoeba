@@ -10,12 +10,13 @@ interface DashboardPropsType {
   foundUsers: {
     [key: string]: any;
   }[];
-  session: {
+  sess: {
     [key: string]: any;
   }[];
 }
 
-const Dashboard: NextPage<DashboardPropsType> = ({ foundUsers, session }) => {
+const Dashboard: NextPage<DashboardPropsType> = ({ foundUsers, sess }) => {
+  console.log(sess);
   return (
     <div className={styles['container']}>
       <Head>
@@ -109,9 +110,9 @@ const Dashboard: NextPage<DashboardPropsType> = ({ foundUsers, session }) => {
 export default Dashboard;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
+  const sess = await getSession({ req: context.req });
 
-  if (!session || !session?.isAdmin) {
+  if (!sess || !sess?.isAdmin) {
     return {
       redirect: {
         destination: '/game',
@@ -123,20 +124,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const client = await connectToDatabase();
   const db = client.db();
 
-  let foundUsers;
   try {
-    foundUsers = await db.collection('users').find({}).toArray();
-    foundUsers = JSON.stringify(foundUsers);
-    foundUsers = JSON.parse(foundUsers);
+    const data = await db.collection('users').find({}).toArray();
+    const foundUsers = JSON.parse(JSON.stringify(data));
+    client.close();
+
+    return {
+      props: {
+        sess,
+        foundUsers,
+      },
+    };
   } catch (err) {
     client.close();
     console.log(err);
+    return {
+      props: {
+        sess,
+        foundUsers: [],
+      },
+    };
   }
-  client.close();
-  return {
-    props: {
-      session,
-      foundUsers,
-    },
-  };
 };

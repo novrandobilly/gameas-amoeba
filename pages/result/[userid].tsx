@@ -7,20 +7,19 @@ import styles from './userid.module.scss';
 import { ObjectId } from 'mongodb';
 
 interface UserIdType {
-  session: {
+  sess: {
     [key: string]: any;
   };
   foundUser: {
     [key: string]: any;
   };
 }
-const UserResult: NextPage<UserIdType> = ({ session, foundUser }) => {
+const UserResult: NextPage<UserIdType> = ({ foundUser, sess }) => {
   const { name, email, gender, dateOfBirth, domicile, jobDesc, regional, numerical, problemSolving, numerical2 } =
     foundUser;
   const saveThePlants = numerical ? Object.values(numerical.result) : [];
   const heroAssemble = problemSolving ? Object.values(problemSolving.result) : [];
   const qualityCheck = numerical2 ? Object.values(numerical2.result) : [];
-
   return (
     <div className={styles['container']}>
       <Head>
@@ -129,7 +128,7 @@ const UserResult: NextPage<UserIdType> = ({ session, foundUser }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query, params }) => {
   const { userid } = query;
   const session = await getSession({ req });
   if (!session || session.userId !== userid) {
@@ -143,19 +142,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
 
   const client = await connectToDatabase();
   const db = client.db();
-
-  let objectId;
-  if (typeof userid === 'string') {
-    objectId = new ObjectId(userid);
-  }
-
   try {
-    let foundUser: any = await db.collection('users').findOne({ email: session.user?.email });
-
-    foundUser = JSON.stringify(foundUser);
-    foundUser = JSON.parse(foundUser);
+    const data = await db.collection('users').findOne({ _id: new ObjectId(userid?.toString()) });
+    const foundUser = JSON.parse(JSON.stringify(data));
     return {
-      props: { session, foundUser },
+      props: { sess: session, foundUser },
     };
   } catch (err) {
     return { props: {} };
