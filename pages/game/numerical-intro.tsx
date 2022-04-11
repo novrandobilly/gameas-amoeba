@@ -1,9 +1,12 @@
 /* eslint-disable @next/next/link-passhref */
 import { useState, useEffect, FC } from 'react';
+import { getSession } from 'next-auth/react';
+import { connectToDatabase } from '../../lib/db';
+import { ObjectId } from 'mongodb';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import { QuestionBoxProps, QuizProps } from './numerical-test';
 
 import ProctorImage from '../../assets/Proctoring.png';
@@ -13,7 +16,7 @@ import WrongIcon from '../../assets/Wrong-icon.png';
 import styles from './numerical-intro.module.scss';
 
 interface NumericProps {
-  nama: string;
+  name: string;
 }
 
 interface IntroProps {
@@ -104,7 +107,7 @@ const QuestionBox: FC<QuestionBoxProps> = (props) => {
 };
 
 const NumericalIntro: FC<NumericProps> = (props) => {
-  const { nama } = props;
+  const { name } = props;
 
   const [renderBackground, setRenderBackground] = useState<string>('');
   const [renderBorder, setRenderBorder] = useState<string>('');
@@ -120,14 +123,14 @@ const NumericalIntro: FC<NumericProps> = (props) => {
   const [question] = useState<QuizProps>({
     topLeft: [{ ask: '12 + 3 x 4' }, { ask: '18 + 5 x 2' }],
     topRight: [{ ask: '20 x 3 + 10' }, { ask: '14 - 9 x 1' }],
-    bottomLeft: [{ ask: '18 - 8 x 9' }, { ask: '5 + 3 x 10' }],
+    bottomLeft: [{ ask: '18 - 8 x 9' }, { ask: '5 + 5 x 15' }],
     bottomRight: [{ ask: '15 x 6 : 7' }, { ask: '20 + 3 x 2' }],
   });
   const [result] = useState<number[]>([70, 80]);
   const [rightAnswer] = useState<string[]>(['topRight', 'bottomLeft']);
   console.log(userAnswer);
   const [story] = useState([
-    { id: 1, text: `hi ${nama}, selamat datang di ruang kendali!` },
+    { id: 1, text: `Hello ${name}, selamat datang di ruang kendali!` },
     {
       id: 2,
       text: `Beberapa jam lalu terjadi gangguan pada pesawat yang 
@@ -181,7 +184,7 @@ const NumericalIntro: FC<NumericProps> = (props) => {
     },
     {
       id: 13,
-      text: `Klik tombol 'Start' apabila Anda sudah siap`,
+      text: `Klik tombol 'Mulai' apabila Anda sudah siap`,
     },
   ]);
 
@@ -358,3 +361,26 @@ const NumericalIntro: FC<NumericProps> = (props) => {
 };
 
 export default NumericalIntro;
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  const userId = typeof session?.userId === 'string' ? session.userId : '';
+  const client = await connectToDatabase();
+  const db = client.db();
+  try {
+    const user = await db.collection('users').findOne({ _id: new ObjectId(userId.toString()) });
+
+    return {
+      props: {
+        name: user?.name,
+      },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+};

@@ -163,8 +163,8 @@ const ProblemSolving: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Problem Solving Ability Test</title>
-        <meta name='description' content='Problem Solving Ability Test Page' />
+        <title>Recognize Em! Test</title>
+        <meta name='description' content='Recognize Em! Test Page' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
