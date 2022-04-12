@@ -5,15 +5,16 @@
 }
 
 .navigation-bar {
-  border: 1px solid black;
-  color: #fff;
-  background-color: #3c3c42;
+  color: #333333;
+  background-color: #fff;
   width: 100%;
   max-width: 1920px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 50px;
+  font-weight: 700;
+  margin: 0 auto;
 }
 .logo {
   background-color: #fff;
@@ -26,16 +27,26 @@
 
 .navigation-items {
   width: 100%;
-  max-width: 200px;
+  max-width: 350px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  & > * {
+  & > *:not(.test-container) {
     padding: 10px;
-    border-radius: 5px;
-    transition: 0.2s ease all;
+    // border-radius: 10px;
+    border-bottom: 5px solid transparent;
+    box-sizing: border-box;
     &:hover {
-      background-color: #56565a;
+      border-bottom: 5px solid #000;
+    }
+  }
+
+  .test-container {
+    a {
+      background-color: #00b17a;
+      color: #fff;
+      border-radius: 25px;
+      padding: 10px 20px;
     }
   }
 }

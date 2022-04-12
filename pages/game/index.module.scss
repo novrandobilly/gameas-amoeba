@@ -1,27 +1,24 @@
 .container {
+  position: relative;
   width: 100%;
-  min-height: 100vh;
-  height: 100%;
-  background-image: url('../../assets/game-home-background.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: 100vh;
   box-sizing: border-box;
   position: relative;
   display: flex;
   align-items: center;
-  padding-left: 10rem;
+  padding-left: 10%;
   h1 {
     margin: 0;
   }
 }
 
 .menu {
+  position: relative;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  top: 18vh;
-  left: 10vw;
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;

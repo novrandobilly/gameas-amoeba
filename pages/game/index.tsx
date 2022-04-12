@@ -5,7 +5,8 @@ import { signIn, signOut } from 'next-auth/react';
 import Head from 'next/head';
 import styles from './index.module.scss';
 import Image from 'next/image';
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/logo.png';
+import BG from '../../assets/game-home-background.png';
 import Link from 'next/link';
 
 const Game: NextPage = () => {
@@ -36,11 +37,12 @@ const Game: NextPage = () => {
         <meta name='description' content='Game Page' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <Image alt='Logo' src={BG} layout='fill' objectFit='cover' />
 
       <div className={styles['menu']}>
         <Link passHref href='/'>
           <div className={styles['logo']}>
-            <Image alt='Logo' src={Logo} width={300} height={150} />
+            <Image alt='Logo' src={Logo} width={300} height={75} />
           </div>
         </Link>
 

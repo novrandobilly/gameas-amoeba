@@ -3,7 +3,7 @@ import styles from './layout.module.scss';
 import Link from 'next/link';
 import NavLink from './navlink';
 import Image from 'next/image';
-import Logo from '../assets/logo.svg';
+import Logo from '../assets/logo.png';
 
 const Layout: FC = ({ children }) => {
   return (
@@ -11,14 +11,19 @@ const Layout: FC = ({ children }) => {
       <div className={styles['navigation-bar']}>
         <Link passHref href='/'>
           <div className={styles['logo']}>
-            <Image alt='Logo' width={100} height={50} src={Logo} />
+            <Image alt='Logo' width={150} height={42} src={Logo} />
           </div>
         </Link>
         <div className={styles['navigation-items']}>
+          <NavLink exact href='/projects'>
+            Our Projects
+          </NavLink>
           <NavLink exact href='/about-us'>
             About Us
           </NavLink>
-          <Link href='/game'>Try Our Test</Link>
+          <div className={styles['test-container']}>
+            <Link href='/game'>Try Our Test</Link>
+          </div>
         </div>
       </div>
       {children}

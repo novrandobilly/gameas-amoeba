@@ -5,15 +5,102 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 30vh;
 }
-
+.text-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 750px;
+  padding: 20px 0;
+}
+.section-1 {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  min-height: 700px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40px;
+  .text-content {
+    h1 {
+      max-width: 550px;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-align: start;
+      margin: 0;
+    }
+    p {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: #fff;
+      text-align: start;
+      margin: 0 0 20px;
+      padding: 0.5em 0;
+    }
+  }
+}
 .game-link {
   a {
-    font-size: 1rem;
-    padding: 0.5em 1em;
-    background-color: #e63673;
+    background-color: #00b17a;
     color: #fff;
-    border-radius: 0.2em;
+    border-radius: 25px;
+    padding: 10px 40px;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+}
+
+.section-2 {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  padding-top: 75px;
+  .text-content {
+    max-width: 1000px;
+    h1 {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
+.section-3 {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  .text-content {
+    max-width: 1000px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h1 {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 0;
+    }
+    p {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      text-align: center;
+      margin: 0 0 40px;
+      padding: 0.5em 0;
+    }
   }
 }
