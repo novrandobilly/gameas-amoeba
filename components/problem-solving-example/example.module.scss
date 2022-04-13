@@ -1,0 +1,95 @@
+.example {
+  width: 100%;
+  max-width: 1300px;
+}
+
+.problem-section {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 1rem;
+  .puzzle-container {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    border: 1px solid #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    .puzzle-box {
+      width: 180px;
+      height: 180px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      background-color: #787878;
+    }
+  }
+  .puzzle-problem {
+    position: relative;
+    border: none;
+    width: 450px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      position: relative;
+      z-index: 5;
+      font-size: 2rem;
+      color: #fff;
+      text-align: center;
+    }
+  }
+}
+
+// =======================================================================================
+
+.answer-section {
+  width: 100%;
+  max-width: 1000px;
+  height: 200px;
+  border: 1px solid #ffffff;
+  background-color: #3372ba;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  z-index: 5;
+}
+.puzzle-item {
+  width: 180px;
+  height: 180px;
+  cursor: move;
+  transition: transform 0.2s ease-in-out;
+}
+.chunk-1 {
+  background-image: url('../../assets/problem-solving/example_2x2/chunk_1.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-2 {
+  background-image: url('../../assets/problem-solving/example_2x2/chunk_2.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-3 {
+  background-image: url('../../assets/problem-solving/example_2x2/chunk_3.png');
+  background-size: cover;
+  background-position: center;
+}
+.chunk-4 {
+  background-image: url('../../assets/problem-solving/example_2x2/chunk_4.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.correct {
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 0 30px 5px #00c521;
+}

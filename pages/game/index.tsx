@@ -73,9 +73,8 @@ const Game: NextPage = () => {
             Game I: Save The Plants!
           </button>
         </Link>
-        <Link passHref href='/game/problem-solving-test'>
-          {/* <button disabled={status !== 'authenticated'} className={styles['problem-solving-button']}> */}
-          <button disabled={true} className={styles['problem-solving-button']}>
+        <Link passHref href='/game/problem-solving-intro'>
+          <button disabled={status !== 'authenticated'} className={styles['problem-solving-button']}>
             Game II: Recognize Em!
           </button>
         </Link>

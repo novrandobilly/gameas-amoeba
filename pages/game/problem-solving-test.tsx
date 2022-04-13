@@ -38,7 +38,7 @@ const initialAnswer = {
 const ProblemSolving: NextPage = () => {
   const [testPhase, setTestPhase] = useState<number>(1);
   const [answerResult, setAnswerResult] = useState<answerType>(initialAnswer);
-  const [timer, setTimer] = useState<number>(10);
+  const [timer, setTimer] = useState<number>(420);
   const { data: session, status } = useSession();
 
   const onSubmitHandler = () => {
